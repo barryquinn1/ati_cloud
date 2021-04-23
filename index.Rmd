@@ -436,7 +436,7 @@ class:middle
 
 ---
 class:middle
-### R Python Interface <img src="https://raw.githubusercontent.com/barryquinn1/reticulate/master/images/reticulated_python.png" width="10%" style="float:right"/>&nbsp;:the `reticulate` package
+### R Python Interface <img src="img/reticulated_python.png" width="10%" style="float:right"/>the `reticulate` package
 
 - In your `Rmd` file, insert a `R code chunk` by clicking Insert and selecting R 
 - `r fa('windows')` **Ctrl+Shift+i**
@@ -444,7 +444,6 @@ class:middle
 
 ```{r python+r set-up}
 library(reticulate)
-use_python("/Users/barry/anaconda3/bin/python")
 ```
 - Can you insert a `python` code chunk and tell it to print "Hello World"?
 --
@@ -541,7 +540,7 @@ print("Elapsed time in seconds:",t_end-t_start)
 
 ]
 .panel[.panel-name[Vectorisation and Memory]
-- The speedup in vectorisation is considerable, almost a factor of 10.
+- The speedup in vectorisation is considerable, almost a factor of 5.
 - However this comes at a price of significantly higher memory usage
 - The reason is that `Numpy` attains speed by preallocating data that can be processed in the compiled layer.
 
@@ -665,7 +664,7 @@ t_end=process_time()
 print("Elapsed time in seconds:",t_end-t_start)
 ```
 
-- In this instance this is not much faster than the base Python code.
+- In this instance this is not faster than the base Python code.
 
 ]
 ]
@@ -673,12 +672,15 @@ print("Elapsed time in seconds:",t_end-t_start)
 ---
 class:top
 # MC simulator using `Numba`
+.panelset[
+.panel[.panel-name[numba simulation]
 
 ```{python}
 import numba
 mcs_simulation_nb=numba.jit(mcs_simulation_np)
 ```
-
+]
+.panel[.panel-name[first run]
 ### This call includes the compile time overhead
 
 ```{python}
@@ -687,7 +689,8 @@ S=mcs_simulation_nb((M,I))
 t_end=process_time()
 print("Elapsed time in seconds:",t_end-t_start)
 ```
-
+]
+.panel[.panel-name[second run]
 ### This call excludes the compile time overhead
 
 ```{python}
@@ -698,9 +701,9 @@ t_end=process_time()
 print("Elapsed time in seconds:",t_end-t_start)
 ```
 
-- Again a significant improvement on the raw Python
 - After compilation `Numba` is much faster than `Numpy`
-
+]
+]
 ---
 class: middle
 # Multiprocessing
@@ -753,16 +756,17 @@ class:inverse
 - We we tasked with outlining how to using Machine Learning techniques to improve and scale their current legacy software.
 - Opposite is the workflow of the legacy system.
 ]
+]
 .pull-right[
 ![](img/workflow_pricecompare.png)
 ]
 ---
 class:middle
 ## Consulting example
-.left-column[
+.pull-left[
 ![](img/workflow_pricecompare.png)
 ]
-.right-column[
+.pull-right[
 - Firstly, the workflow should be broken down into "jobs" or "tasks".  
 - Each of these tasks usually has a human decision or action attached, which has the potential to be automated via an AI tool.  
 - For instance, in figure 1 the company's workflow has two critical decisions:

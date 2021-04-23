@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>FIN7030:Algorithmic trading and investment</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Barry Quinn" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view/tile-view.js"></script>
+    <script src="libs/xaringanExtra-webcam/webcam.js"></script>
+    <script id="xaringanExtra-webcam-options" type="application/json">{"width":"200","height":"200","margin":"1em"}</script>
+    <script src="libs/js-cookie/js.cookie.js"></script>
+    <script src="libs/peerjs/peerjs.min.js"></script>
+    <script src="libs/tiny.toast/toast.min.js"></script>
+    <link href="libs/xaringanExtra-broadcast/broadcast.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-broadcast/broadcast.js"></script>
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link href="libs/xaringanExtra-extra-styles/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <script src="libs/viz/viz.js"></script>
+    <link href="libs/DiagrammeR-styles/styles.css" rel="stylesheet" />
+    <script src="libs/grViz-binding/grViz.js"></script>
+    <link href="libs/tachyons/tachyons.min.css" rel="stylesheet" />
+    <script src="libs/kePrint/kePrint.js"></script>
+    <link href="libs/lightable/lightable.css" rel="stylesheet" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } },
+      });
+    </script>
+    <style>
+    .mjx-mrow a {
+      color: black;
+      pointer-events: none;
+      cursor: default;
+    }
+    </style>
+    <link rel="stylesheet" href="fonts.css" type="text/css" />
+    <link rel="stylesheet" href="mycssblend.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# FIN7030:Algorithmic trading and investment
+## High performance cloud computing in finance
+### Barry Quinn
+### 20/12/2020 (updated 2021-04-23)
+
+---
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;&lt;span&gt;quinference.com&lt;/span&gt;&lt;/div&gt;
+
+---
+class:inverse
+# Outline 
+- .salt[What is cloud computing?]
+- .fat[Introduction to the Q-RaP]
+- .acid[Taxonomy of parallel computing]
+- .heat[Performance computing in Python]
+- .black[The economics of AI in business]
+---
+
+class:middle
+background-image: url(img/recticulated_python.png)
+background-size: cover
+
+## Introduction
+.large[
+- This course will expose you to the flexibility of cloud computing
+- We will learn how to build agile analytics by combining &lt;svg style="height:0.8em;top:.04em;position:relative;" viewBox="0 0 581 512"&gt;&lt;path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/&gt;&lt;/svg&gt; &lt;svg style="height:0.8em;top:.04em;position:relative;" viewBox="0 0 448 512"&gt;&lt;path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/&gt;&lt;/svg&gt; &lt;svg style="height:0.8em;top:.04em;position:relative;" viewBox="0 0 448 512"&gt;&lt;path d="M439.8 200.5c-7.7-30.9-22.3-54.2-53.4-54.2h-40.1v47.4c0 36.8-31.2 67.8-66.8 67.8H172.7c-29.2 0-53.4 25-53.4 54.3v101.8c0 29 25.2 46 53.4 54.3 33.8 9.9 66.3 11.7 106.8 0 26.9-7.8 53.4-23.5 53.4-54.3v-40.7H226.2v-13.6h160.2c31.1 0 42.6-21.7 53.4-54.2 11.2-33.5 10.7-65.7 0-108.6zM286.2 404c11.1 0 20.1 9.1 20.1 20.3 0 11.3-9 20.4-20.1 20.4-11 0-20.1-9.2-20.1-20.4.1-11.3 9.1-20.3 20.1-20.3zM167.8 248.1h106.8c29.7 0 53.4-24.5 53.4-54.3V91.9c0-29-24.4-50.7-53.4-55.6-35.8-5.9-74.7-5.6-106.8.1-45.2 8-53.4 24.7-53.4 55.6v40.7h106.9v13.6h-147c-31.1 0-58.3 18.7-66.8 54.2-9.8 40.7-10.2 66.1 0 108.6 7.6 31.6 25.7 54.2 56.8 54.2H101v-48.8c0-35.3 30.5-66.4 66.8-66.4zm-6.7-142.6c-11.1 0-20.1-9.1-20.1-20.3.1-11.3 9-20.4 20.1-20.4 11 0 20.1 9.2 20.1 20.4s-9 20.3-20.1 20.3z"/&gt;&lt;/svg&gt; 
+
+- Financial institutions have a long history of heavily investing in technology for gaining market share and defending their current position
+- The democratisation of computing processing power by cloud providers, has lead to an explosion in financial machine learning applications.
+- Today technology that would have costed millions 20 years ago can be rented for thousand from these cloud providers
+]
+
+&gt;Meriwther spent $20 million on a state-of-the-art computer system and hired a crack team of financial engineers to run the show at LTCM..... 
+&lt;footer&gt;Scott Patterson, The Quants, 2010&lt;/footer&gt;
+---
+class: middle
+# What is cloud computing ?
+
+- .heat[Cloud computing shares many of the similarities of electricity]
+
+--
+
+- .large[In the early days of electrical power, corporations and factories where powered by on-site small-scale power plants.] 
+- .large[Today, large scale power plants with efficient transmission networks have powered modern industrial society, allowing electricity to be at everyone's disposal ar reasonable prices]
+
+--
+
+- .heat[Much like electricity the core concept of cloud computing is resource sharing]
+---
+class: top
+# What is cloud computing ?
+
+.fat[definitions:]
+
+&gt;A model for enabling ubiquitious, convenient, on-demand network access to a shared pool of configurable computing resources (e.g., networks, servers, storage, applications, and services) that can be rapidly provisioned and released with minimal management effort or server provider interaction
+
+&lt;footer&gt;National Institute of Standards and Technology(NIST) of the US Department of Commerce, 2019&lt;/footer&gt;
+
+--
+
+&gt;Simply put, cloud computing is the delivery of computing services – including servers, storage, databases, networking, software, analytics and intelligence – over the Internet (**"the cloud"**) to offer faster innovation, flexible resources and economies of scale. Typically, you only pay for cloud services you use, helping you lower your operating costs, run your infrastructure more efficiently and scale as your business needs change.
+
+&lt;footer&gt;Beginners guide to cloud computing, Microsoft Azure, 2020&lt;/footer&gt;
+
+---
+class:top
+## Essential characteristics of cloud computing solutions
+
+.heatinline[The follow distinguish cloud computing from other solutions, such as on-site high performance computing servers]
+
+- .large.fancy[On-demand self-service] 
+  - A consumer can provision computing capacity as needed without interaction with service provider
+- .large.fancy[Broad network access]
+  - Computing resources are available to the consumer through the network and can  be accessed from mobile phones, tablets, laptops, and workstations.
+- .large.fancy[Resource pooling]
+  - Resources are dynamically assigned to customers' needs
+- .large.fancy[Rapid elasticity]
+  - Capacities can be reconfigured automatically to scale rapidly in response to the changing demand
+- .large.fancy[Measured service]
+  - The resource utilisation is automatically controlled and optimised by the cloud systems.  The usage is monitored, measured, and reported
+
+---
+class: middle
+
+## Why high performance computing and why now?
+.salt[A key reason is the regulatory response to the flash crash of 2010]
+&gt; On the 6th May, 2010 at 2.45 p.m.(EST), the US stock market experienced a nearly 10% drop in the Dow Jones Industrial Average, only to recover most of ther loss a few minutes later
+
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/_ZDEWVJan0s" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
+
+---
+class:inverse
+# Flash crashed explained
+&lt;img src="img/nyt_flashcrash.png" height="70%" width="70%" class="center"&gt;
+
+---
+class: middle
+
+## Why high performance computing and why now?
+
+.saltinline[It took the regulatory agencies (SEC) five months to come up with an investigation report on the 2010 flash crash]
+
+.heatinline[In the congressional hearings after the event, the SEC official give the primary reason for the long delay as the volumne of data to be investigated (~20 terabytes)]
+
+.heatinline[HPC scientific computing systems such as the National Research Scientific Computing center(NERSC). routinely work with hundreds of terrabytes in minutes]
+
+.heatinline[After the congressional hearing Lawrence Berkley National Laboratory (LNBL) established the Computational Intelligence and Forecasting Technologies (CIFT) project to promote HPC tools and techniques for analysing of financial times series data]
+
+
+---
+class:middle
+background-image: url(img/t1.png)
+background-size: cover
+---
+class:middle
+background-image: url(img/t2.png)
+background-size: cover
+---
+class: middle
+## QMS Remote analytics Platform (Q-RaP)
+
+- We have recently introduced state-of-the-art cloud computing teaching for the masters students in the Management School
+
+- We have built a high-performance virtual machine in the Azure cloud to expose students to the production-level technologies they will experience in industry.
+
+- SPECIFICATION: A Linux (ubuntu 18.04) operating system (the most popular OS) with 64 vCPUs, 256 GiB of RAM.
+
+- This will allows us to teach 64-128 students concurrently (with toy computational tasks with each student limited to 1vCPU and 4 GiB RAM)
+
+---
+class:inverse,top
+## Knowledge Gap in *Quant Finance* Industry
+
+&lt;img src="img/gap.jpg" class="center" width="40%"&gt;
+
+---
+class:middle
+# Q-RaP software
+.pull-left[
+- To help fill this gap we will be using the last production level software on  Q-RaP.
+
+- This be preliminary through the RStudio professional product range
+
+&lt;img src="img/RStudio-Logo.png" width="50%" class="center"&gt;
+
+]
+.pull-right[
+- Programming language knowledge is like a fashion accessory; picking a language to learning over all others can mean you are out of fashion very quick
+
+- When first learning to code it is much better to learning how to integrate languages on a agile platform.
+- &lt;svg style="height:0.8em;top:.04em;position:relative;" viewBox="0 0 581 512"&gt;&lt;path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/&gt;&lt;/svg&gt; is an interoperable language with widespread connectivity
+
+&lt;img src="img/interoperableR.png" width="80%" class="center"&gt;]
+
+.heatinline[&lt;svg style="height:0.8em;top:.04em;position:relative;" viewBox="0 0 581 512"&gt;&lt;path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/&gt;&lt;/svg&gt; is design as an interperable language connecting many software]
+
+---
+class:middle
+# Q-RaP software
+
+- The user interface on the server will be power by Rstudio Team Product, the industry version of the free Rstudio IDE for R.
+
+- .fatinline[Learning to integrate programming languages as a quant finance professional is part of the communicative bridge building needed to close the gap between complex models and financial decisions]
+
+- From this product suite we will be using [RStudio Server Pro](https://rstudio.com/products/rstudio-server-pro/) and RStudio connect
+
+&gt;Rstudio Server Pro is the preferred data analysis and integrated development experience for professional R users and data science teams who use R and Python. &lt;footer&gt;RStudio Team, 2020&lt;/footer&gt;
+
+---
+class:top,center
+# Accessing RStudio on Q-RaP
+
+.pull-left[ 
+### Steps
+1. Open a web browser
+2. Navigate to: http://q-rap.qub.ac.uk:8787/
+3. login using the credential provided
+
+.heatinline[Note that these credentials are private and can only be accessed by the administrator (Me)]
+]
+.pull-right[ 
+&lt;img src="img/qms_rstudio_login.png" alt="server_login" &gt;
+
+]
+---
+class:top,center
+# Accessing Rstudio Connect on Q-RaP
+
+.pull-left[ 
+### Steps
+1. Open a web browser
+2. Navigate to: http://q-rap.qub.ac.uk
+3. Create an account using your &lt;NAME&gt;@qub.ac.uk email
+4. Use a recognisable username that identifies you, for example `barry-quinn`
+]
+.pull-right[ 
+&lt;img src="img/rsconnect_hp.png" alt="connect_login" &gt;
+
+]
+
+.fat[We will be using these resources extensively for both growth learning and assessment]
+
+---
+class: middle,center
+background-image: url(img/title-slide-img.png)
+background-size: cover
+# A breathing break
+
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/PmBYdfv5RSk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
+
+---
+class:middle
+# Taxonomy of parallel computing
+- .large[Computer processors process instructions sequentially.
+- Traditional computing problems are serial by design.
+- The birth of multiprocessors (*multicore processors*) has innovated a new type of computing problem:
+]
+.acid[how to utilise the parallel structure]
+- .large[Roughly speaking, multicore processors are equivalent to running multiple computers at a time]
+---
+class:middle
+# Taxonomy of parallel computing
+.pull-left.acid[Parallel computing problems in contrast to serial computing problems, refer to the type of problem that can be divided into small Jobs which can be processed simultaneously ]
+.pull-right[
+**embarrassingly parallel computing**:
+<div id="htmlwidget-ce5ae189fb485bfc49e2" style="width:504px;height:200px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ce5ae189fb485bfc49e2">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+
+**nonembarrassingly parallel computing**:
+<div id="htmlwidget-8c8bdeaae563cb75597d" style="width:504px;height:200px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8c8bdeaae563cb75597d">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\nJob1->Job2[dir=\"both\",label=\"Information\",style=\"dashed\"]\nJob2->Job3[dir=\"both\",label=\"Information\",style=\"dashed\"]\n{rank=same; Job1;Job2;Job3}\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+]
+---
+class:top
+
+# Taxonomy of parallel computing
+
+.pull-left[
+
+#### Figure 1: embarrassingly parallel computing
+<div id="htmlwidget-e525c73c58660c25de4e" style="width:504px;height:200px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e525c73c58660c25de4e">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+
+#### Figure 2: snonembarrassingly parallel computing
+<div id="htmlwidget-2c7993edf87947be321a" style="width:504px;height:200px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2c7993edf87947be321a">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\nJob1->Job2[dir=\"both\",label=\"Information\",style=\"dashed\"]\nJob2->Job3[dir=\"both\",label=\"Information\",style=\"dashed\"]\n{rank=same; Job1;Job2;Job3}\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+]
+.pull-right[
+-  Based on the dependence structure of sub-Jobs problems parallel computing problems can be further classified into *embarrassingly parallel* and  *non embarrassingly parallel*
+- If sub-Jobs are independent then we have an *embarrassingly parallel* problem
+- Otherwise we have a  *non embarrassingly parallel* problem
+- In figure 1 there is no communication between Jobs, while in figure 2 some communication between Jobs is required
+]
+---
+class:inverse
+
+# Taxonomy of parallel computing
+.
+- .large[Problems can also be classified by there nature:
+- .heatinline[Data parallelism] focuses on distributing data across different processors
+- .heatinline[Job parallelism] focuses on distributing execution processes (subtasks) to different processors]
+---
+class:middle,left
+# The serial-parallel scale
+.left-column[
+<div id="htmlwidget-d576d50d54fec5fc4c2d" style="width:504px;height:400px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d576d50d54fec5fc4c2d">{"x":{"diagram":"\ndigraph  {\ngraph [label=\"Figure 1: Inherently serial\"]\n\"Input Data\"->Job1->\"Results\"->Job2->\"More Results\"->Job3\n} \n","config":{"engine":"dot","options":"margin: auto !important;"}},"evals":[],"jsHooks":[]}</script>
+]
+
+.right-column[
+
+- Another important aspect of parallel computing is whether the parallel computing problem is *scalable*.
+- An inherently serial problem cannot be parallelised, e.g. Figure 1
+- Scalable problems have either a scalable problem size or scalable parallelism.
+- Either the solution time reduces with the increasing of parallelism or the performance of the solution increases with the problem size.
+- The elasticity of the computing architecture is the key to the success of the processing of scalable problems
+
+]
+
+---
+class:middle
+# Example from the finance industry
+####.heat[Monte Carlo (MC) Options Pricing]
+- Using arbitrage pricing theory, the option price is equal to the expected payoff `\(V\)` discounted by a factor `\(D\)` which can be evaluated via MC method.
+The Monte Carlo estimator of option price is given by
+`$$C_0=D \times \frac{1}{N} \sum_{\omega \in sampleset}V(\omega)$$`
+where N is the number of sample paths (simulations)
+
+1. The simulation of each price path is independent of other paths, therefore it is easy to parallel process the simulation of different paths on different computing nodes
+2. It is a task-parallel in the sense that simulations of each path is a small task.  However it is not data-parallel since there is no data set to be distributed to different computing nodes.
+3. The scalable benefit is improved price accuracy as `\(N\)` increases, the error reduction being approximately `\(1/\sqrt{N}\)`
+
+---
+class:middle
+# Example from the finance industry
+#####.heat[Backtesting Investment Strategies]
+
+.pull-left[
+#### Task-parallel backtesting
+- Suppose you need to backtest a basket of different investment strategies to identify the optimal strategies
+- The process of each investment strategy is independent of each other and can be run simultaneously.
+- Distributing the processing of different strategies to different computing nodes is an *embarrassingly parallel* and *task parallel* implementation.
+]
+.pull-right[
+#### Data-parallel backtesting
+- Backtesting on one strategy can also be implemented as *data parallel*
+- By generating subsamples from test data set(e.g. by bootstrapping), strategy can be processed on different subsamples simultaneously
+- The results on different subsamples is then aggregated to generate the performance and risk report of the strategy
+]
+---
+class:middle
+## Business reporting in &lt;svg style="height:0.8em;top:.04em;position:relative;" viewBox="0 0 581 512"&gt;&lt;path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/&gt;&lt;/svg&gt; for the &lt;svg style="height:0.8em;top:.04em;position:relative;" viewBox="0 0 448 512"&gt;&lt;path d="M325.4 289.2L224 390.6 122.6 289.2C54 295.3 0 352.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-70.2-54-127.1-122.6-133.2zM32 192c27.3 0 51.8-11.5 69.2-29.7 15.1 53.9 64 93.7 122.8 93.7 70.7 0 128-57.3 128-128S294.7 0 224 0c-50.4 0-93.6 29.4-114.5 71.8C92.1 47.8 64 32 32 32c0 33.4 17.1 62.8 43.1 80-26 17.2-43.1 46.6-43.1 80zm144-96h96c17.7 0 32 14.3 32 32H144c0-17.7 14.3-32 32-32z"/&gt;&lt;/svg&gt; user
+.pull-left[
+
+###&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/rmarkdown.png" width="10%" style="float:left"/&gt;&amp;nbsp; R Markdown can be used to create: 
+
+- Reports (HTML, PDF, Word)
+- Slide Decks (HTML, PowerPoint)
+- Web Apps
+- Web Pages
+- Books
+- It is part of the `tidyverse` package
+
+![](https://d33wubrfki0l68.cloudfront.net/61d189fd9cdf955058415d3e1b28dd60e1bd7c9b/9791d/images/rmarkdownflow.png)
+]
+.pull-right[ 
+### Your turn
+- Go to server, login in and create new session
+- Create a `RMarkdown` file by *File &gt; New File &gt; R Markdown*
+
+&lt;img src="img/qms_rstudio_rmarkdown.png" alt="rmarkdown",height="100"/&gt;
+]
+
+---
+class:middle
+### R Python Interface &lt;img src="img/reticulated_python.png" width="10%" style="float:right"/&gt;the `reticulate` package
+
+- In your `Rmd` file, insert a `R code chunk` by clicking Insert and selecting R 
+- &lt;svg style="height:0.8em;top:.04em;position:relative;" viewBox="0 0 448 512"&gt;&lt;path d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8v177.9zm0-380.6v180.1H448V32L203.8 65.7z"/&gt;&lt;/svg&gt; **Ctrl+Shift+i**
+- &lt;svg style="height:0.8em;top:.04em;position:relative;" viewBox="0 0 384 512"&gt;&lt;path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/&gt;&lt;/svg&gt; **Cmd+Shift+i**
+
+
+```r
+library(reticulate)
+```
+- Can you insert a `python` code chunk and tell it to print "Hello World"?
+--
+
+
+```python
+print("Hello World")
+```
+
+```
+## Hello World
+```
+
+---
+class:middle
+# Improving computational performance
+
+- There is a commonly held misconception that both Python and R are relatively slow programming languages and not appropriate to implement computationally demand tasks in finance.
+- This criticism stems from the fact that most financial algorithms require loops and loops are slow on interpreted languages such as R and Python.
+- Traditionally C or C++, which are compiled programming languages, have been used to speed up loops. 
+
+---
+class:middle
+# Performance Python
+
+- We will consider a number of approaches to speed up typical tasks and algorithms often encountered in finance including:
+.bg-gold[
+1. **Vectorisation**&lt;br&gt;Making use of Python's vectorisation which can effectively remove a loop structure of a problem
+2. **Dynamic Compiling**&lt;br&gt; Using the `Numba` package allows dynamic compilations of pure Python code using [LLVM technology](https://llvm.org/)
+3. **Static Compiling**:&lt;br&gt; `Cython` is not only a Python package but a hybrid language that combines Python and C.
+4. **Multiprocessing**:&lt;br&gt;Finally we can excute the code in parallel using the `multiprocessing`Python package
+]
+---
+class:middle
+# Loops in Python
+
+.panelset[
+.panel[.panel-name[Explanation]
+- We will start by creating a simple function in Python
+- The task is to draws a certain number of random variables and return their average
+- Imaginatively, we will call the function `average_py()`
+
+]
+.panel[.panel-name[Python Code]
+
+
+```python
+import random
+from time import process_time
+def average_py(n):
+  s = 0
+  for i in range(n):
+      s +=random.random()
+  return s/n
+```
+]
+
+.panel[.panel-name[Output]
+
+```python
+t_start=process_time()
+n=1000000
+average_py(n)
+```
+
+```
+## 0.5002519893209428
+```
+
+```python
+t_end=process_time()
+print("Elapsed time in seconds:",t_end-t_start)
+```
+
+```
+## Elapsed time in seconds: 0.23530957600000058
+```
+
+]
+]
+---
+class:top
+# Loops using `Numpy`
+.panelset[
+.panel[.panel-name[Explanation]
+- The strength of `Numpy` lies in its vectorisation capabilities.
+- Formally, loops vanish on the Python level
+- The looping takes place one level deeper based on optimising and compiling routines provided by `Numpy`
+- The function `average_np()` makes use of these
+
+]
+.panel[.panel-name[Python Code]
+
+
+```python
+import numpy as np
+def average_np(n):
+  s = np.random.random(n)
+  return s.mean()
+```
+]
+
+.panel[.panel-name[Output]
+
+```python
+t_start=process_time()
+n=1000000
+average_np(n)
+```
+
+```
+## 0.5002958538793009
+```
+
+```python
+t_end=process_time()
+print("Elapsed time in seconds:",t_end-t_start)
+```
+
+```
+## Elapsed time in seconds: 0.051868243999999564
+```
+
+]
+.panel[.panel-name[Vectorisation and Memory]
+- The speedup in vectorisation is considerable, almost a factor of 5.
+- However this comes at a price of significantly higher memory usage
+- The reason is that `Numpy` attains speed by preallocating data that can be processed in the compiled layer.
+
+]
+]
+---
+class:top
+# Monte Carlo Simulation in Finance
+- As noted earlier, Monte Carlo simulation is an indepensible numerical tool on quantitative finance.
+- Banks and other financial institutions using it for pricing and risk management purposes. 
+- It is one of the most powerful, flexible, but computationally demanding methods in quantitative finance. 
+- This demand has only increased since Basel III, as banks and financial institutions are required to pricing and hedge counterparty risk of complex derivatives.
+---
+class:top
+# Monte Carlo Simulation of Stock Prices
+.panelset[
+.panel[.panel-name[Explanation]
+- In derivative pricing it is standard practice to simulate a set of discrete time series paths for the value of a stock
+- We can create a hybrid MC simulator by implementing a Python loop on `ndarray` objects.
+- As before we will then use this function, mcs_simulation_py(), to benchmark execution time across a number of performance enhancing approaches.
+- Specify, this function simulates geometric Brownian motion price paths using Equation 10-2. in Hilpisch (2018) "Python for Finance".
+]
+.panel[.panel-name[Python Code for MC simulator]
+
+
+```python
+import math
+S0=36.
+T=1.0
+r=0.06
+sigma=0.2
+def mcs_simulation_py(p):
+  M,I = p # M= number of time intervals for discretisation. I = number of paths to simulate. 
+  dt = T/M
+  S = np.zeros((M+1,I))
+  S[0]=S0
+  rn = np.random.standard_normal(S.shape)
+  for t in range(1,M+1):
+    for i in range(I):
+      S[t,i] = S[t-1,i]*math.exp((r-sigma**2/2)*dt+sigma*math.sqrt(dt) *rn[t,i])
+  return S
+```
+]
+
+.panel[.panel-name[Execution for MC simulator]
+
+&lt;!-- reticulate::source_python('mcs_simulation.py') --&gt;
+
+
+
+```python
+t_start=process_time()
+I=1000
+M=100
+S = mcs_simulation_py((M,I));
+t_end=process_time()
+```
+
+```python
+print("Elapsed time in seconds:",t_end-t_start)
+```
+
+```
+## Elapsed time in seconds: 0.27152449200000106
+```
+
+
+
+
+]
+.panel[.panel-name[Plot 1000 Price Paths in R]
+.pull-left[
+- `reticulate` allows you to pull objects back into `R` using the `py$OBJECT_NAME` convention.
+```
+py$S %&gt;% 
+  as_tibble() %&gt;%
+  mutate(t=row_number()) %&gt;%
+  gather(Path,Price,-t) %&gt;%
+  ggplot(aes(x=t,y=Price,colour=Path)) + 
+  geom_line() +
+  theme(legend.position = "none") +
+  labs(y="Simulated Prices")
+```
+]
+.pull-right[
+&lt;img src="index_files/figure-html/plot_python_object-1.png" width="504" /&gt;
+]
+]
+]
+---
+class:middle
+# MC simulator using `Numpy`
+.panelset[
+.panel[.panel-name[`Numpy` Version]
+- The below python code is very similar to the previous except for the highlighted line
+
+
+```python
+def mcs_simulation_np(p):
+  M,I = p
+  dt = T/M
+  S = np.zeros((M+1,I))
+  S[0]=S0
+  rn = np.random.standard_normal(S.shape)
+  for t in range(1,M+1):
+    for i in range(I):
+      S[t,i] = S[t-1,i] * np.exp((r-sigma**2/2) * dt + sigma * math.sqrt(dt) * rn[t,i]) 
+  return S
+```
+]
+.panel[.panel-name[Execution time for MC simulator]
+
+
+```python
+t_start=process_time()
+S = mcs_simulation_np((M,I))
+t_end=process_time()
+```
+
+
+```python
+print("Elapsed time in seconds:",t_end-t_start)
+```
+
+```
+## Elapsed time in seconds: 0.44403345300000296
+```
+
+- In this instance this is not faster than the base Python code.
+
+]
+]
+
+---
+class:top
+# MC simulator using `Numba`
+.panelset[
+.panel[.panel-name[numba simulation]
+
+
+```python
+import numba
+mcs_simulation_nb=numba.jit(mcs_simulation_np)
+```
+]
+.panel[.panel-name[first run]
+### This call includes the compile time overhead
+
+
+```python
+t_start=process_time()
+S=mcs_simulation_nb((M,I))
+t_end=process_time()
+print("Elapsed time in seconds:",t_end-t_start)
+```
+
+```
+## Elapsed time in seconds: 1.0415763810000023
+```
+]
+.panel[.panel-name[second run]
+### This call excludes the compile time overhead
+
+
+```python
+from time import process_time
+t_start=process_time()
+S=mcs_simulation_nb((M,I))
+t_end=process_time()
+print("Elapsed time in seconds:",t_end-t_start)
+```
+
+```
+## Elapsed time in seconds: 0.029062000000003252
+```
+
+- After compilation `Numba` is much faster than `Numpy`
+]
+]
+---
+class: middle
+# Multiprocessing
+
+.panelset[
+.panel[.panel-name[Explanation]
+
+- As mentioned before, Monte Carlo simulation is a task that lends itself well to parallelisation.
+- It is an *embarrassingly* parallel problem with no information shared across sub Jobs.
+- In the example we could parallelise the simulation of 1000 paths into 10 processes simulating 100 paths each.
+- .saltinline[On the server students are restricted to one vCPU, so what follows is better run on a local multiprocessor machine]
+]
+.panel[.panel-name[Parallelisation in Python]
+
+- .saltinline[The following code makes use of the `multiprocessing` module and divides the total number of paths to be simulated into small chunks of size `\(I/p\)`, where `\(p&gt;0\)`]
+
+
+```python
+import multiprocessing as mp
+pool = mp.Pool(processes=8)
+p=10
+```
+
+- .saltinline[After all the single tasks are finished, the results are put together in a single `ndarray` object using `np.stack`]
+
+
+```python
+t_start=process_time()
+S= np.hstack(pool.map(mcs_simulation_np,p*[(M,int(I/p))]))
+t_end=process_time()
+print("Elapsed time in seconds:",t_end-t_start)
+```
+
+```
+## Elapsed time in seconds: 0.029586524999999142
+```
+
+- .heatinline[In this instance there is no more speed-up to be observed.]
+]
+]
+
+---
+class:middle 
+## The economics of AI tools in Business
+
+- Much like the semiconductor reduced the cost of arithmetic , recent advances in AI make the task of prediction abundant and inexpensive.  
+- Advancements have been built around the rubric of machine learning where recent developments in algorithms, computational speed, data storage, and data retrieval have combined to reduce the cost of machine learning predictions.
+- The successful deployment of AI tools requires an insight into how best to insert AI into the workflow of a company.  
+
+---
+class:inverse
+## Consulting example
+.pull-left[
+- Recently, myself and Dr Byron Graham we recently involved in an consultation exercise on price intelligence for a global price comparison company
+- .heatinline[Pricing intelligence involves monitoring competitor prices and updating prices accordingly 
+- We we tasked with outlining how to using Machine Learning techniques to improve and scale their current legacy software.
+- Opposite is the workflow of the legacy system.
+]
+]
+.pull-right[
+![](img/workflow_pricecompare.png)
+]
+---
+class:middle
+## Consulting example
+.pull-left[
+![](img/workflow_pricecompare.png)
+]
+.pull-right[
+- Firstly, the workflow should be broken down into "jobs" or "tasks".  
+- Each of these tasks usually has a human decision or action attached, which has the potential to be automated via an AI tool.  
+- For instance, in figure 1 the company's workflow has two critical decisions:
+  1. Given a URL, where on the web page is the product price located?
+  2. How can the price be efficiently and dynamically retrieved?
+]
+
+---
+class:inverse
+## Economics of AI: Corporate strategy
+
+.heatinline[
+-  A successful corporate AI strategy requires clear and meaningful decomposition of the workflow.
+- Each task in the workflow needs to be decomposed in order to see where AI prediction can be inserted.  
+- This, in turn, allows estimation of the benefit of enhanced prediction and the cost of generating that prediction.  
+- Once reasonable estimates have been made, the potential AI projects can be rank-ordered from highest to lowest return on investment(ROI).  
+- Management can then start at the top and implement AI tools as long as the expected ROI makes sense.
+]
+
+---
+class:middle
+## Economic of AI: Decomposing business decisions
+.pull-left[
+![](img/anatomy_of_a_task.png)
+]
+.pull-right[
+- Figure 2 illustrates the *anatomy of a task*, a diagram used by [Creative Destruction Labs](https://www.creativedestructionlab.com/ ) a world-leading incubator for successful AI start-ups
+
+- When someone makes a decision, they take input data from the world that enables a prediction. 
+- The prediction is made possible as training has occurred about relationships between different types of data and which data is most closely associated with a situation. 
+- A decision-maker would then combine the prediction with judgement (based on intuition and experience) on what matters to choose appropriate action.  
+- The action leads to an outcome which has an associated payoff or reward. 
+]
+
+---
+class:middle
+## Economic of AI: Decomposing business decisions
+.pull-left[
+![](img/anatomy_of_a_task.png)
+]
+.pull-right[
+- The outcome is the consequence of the decision. 
+- It is needed to provide a complete picture. 
+- The outcome may also provide feedback to help improve the next prediction.  
+- And thus, the cycle of the task repeats.  
+]
+
+---
+class:middle
+## Economic of AI: Decomposing business decisions
+.pull-left[
+![](img/anatomy_of_a_task.png)
+
+]
+
+.pull-right[
+- Reframing decisions in this way places prediction at the centre of the task. 
+- The process has three different types of data, input, training and feedback. 
+- As there is uncertainty around all prediction, you need judgement when prediction turns out to be wrong.  
+- Judgement involves determining the relative payoff associated with each possible outcome, including those with **correct** decisions as well as those associated with mistakes.  
+
+- Uncertainty increases the cost of judging the payoffs for a given decision. 
+- Observed outcomes can be used as feedback to inform the next prediction.  
+]
+---
+class:middle
+## Economic of AI: Decomposing business decisions
+.pull-left[
+
+![](img/anatomy_of_a_task.png)
+
+]
+
+.pull-right[
+
+- By breaking up a decision into elements, we can think about which parts of the human activities will diminish in value and which will increase as a result of enhanced machine prediction.  
+
+--
+
+- As machines substitute for humans in prediction, the value of human prediction will decline. 
+
+--
+
+- Importantly, the other elements of a decision – judgement, data, action – remain, firmly placed in the human domain. 
+
+--
+
+- These are complements to prediction, which means that their value will increase as prediction becomes cheaper. 
+
+--
+
+-In this way, AI tools can create opportunities to exploit expertise in judgement where previously human predictions were so poor as to avoid any decision making (for example, where the default option is always accepted).  
+
+--
+
+- In this case, the demand for human judgement will increase.
+
+]
+---
+class:middle
+# Terminology   
+&lt;div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:400px; overflow-x: scroll; width:100%; "&gt;&lt;table class=" lightable-paper" style='font-family: "Arial Narrow", arial, helvetica, sans-serif; margin-left: auto; margin-right: auto;'&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; Term &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; Explanation &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Computing instances &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Refers to a (virtual) server instance that is linked to a computing network to provide computing resource. To offer flexibility to their customers, cloud vendors offer different types of nodes that comprise various combinations of CPU (central processing unit), memory, storage, and networking capacity &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Data center &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; A data center comprises a large number of computing nodes and necessary facilities to house the computer system &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Middelware &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; is the computer software that *glues* software applications with computing hardware. In cloud computing, middleware is used to enable communication and management data &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Virtualisation &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Using computer resources to imitate other computer resources. By virtualisation, users are not locked with specific operating systems, CPU architecture, etc. Middleware and virtualisation are particularly important to ensure on-demand self-service of cloud computing &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Cloud bursting &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Cloud computing offers on-demand service. Cloud bursting refers to the process of dynamic deployment of software applications &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Elastic computing &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; is a computing service which has the ability to scale resources to meet requirements, e.g. Amazon's EC2 instances &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Wall clock time(WCT) &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; is the human perception of the passage of time from the start to the completion of a task &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; CPU time &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; The amount of time for which a CPU was used for processing instructions of a computer program or operating system, as opposed to, for example, waiting for input/output(I/O) operations or entering low-power (idle) mode. &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://platform.twitter.com/widgets.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": true,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+(function(time) {
+  var d2 = function(number) {
+    return ('0' + number).slice(-2); // left-pad 0 to minutes/seconds
+  },
+
+  time_format = function(total) {
+    var secs = Math.abs(total) / 1000;
+    var h = Math.floor(secs / 3600);
+    var m = Math.floor(secs % 3600 / 60);
+    var s = Math.round(secs % 60);
+    var res = d2(m) + ':' + d2(s);
+    if (h > 0) res = h + ':' + res;
+    return res;  // [hh:]mm:ss
+  },
+
+  slide_number_div = function(i) {
+    return document.getElementsByClassName('remark-slide-number').item(i);
+  },
+
+  current_page_number = function(i) {
+    return slide_number_div(i).firstChild.textContent;  // text "i / N"
+  };
+
+  var timer = document.createElement('span'); timer.id = 'slide-time-left';
+  var time_left = time, k = slideshow.getCurrentSlideIndex(),
+      last_page_number = current_page_number(k);
+
+  setInterval(function() {
+    time_left = time_left - 1000;
+    timer.innerHTML = ' ' + time_format(time_left);
+    if (time_left < 0) timer.style.color = 'red';
+  }, 1000);
+
+  slide_number_div(k).appendChild(timer);
+
+  slideshow.on('showSlide', function(slide) {
+    var i = slide.getSlideIndex(), n = current_page_number(i);
+    // reset timer when a new slide is shown and the page number is changed
+    if (last_page_number !== n) {
+      time_left = time; last_page_number = n;
+      timer.innerHTML = ' ' + time_format(time); timer.style.color = null;
+    }
+    slide_number_div(i).appendChild(timer);
+  });
+})(120000);
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
