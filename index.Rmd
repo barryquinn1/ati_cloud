@@ -67,7 +67,7 @@ class:inverse
 - .fat[Introduction to the Q-RaP]
 - .acid[Taxonomy of parallel computing]
 - .heat[Performance computing in Python]
-- .black[The economics of AI in business]
+- .glow[The economics of AI in business]
 ---
 
 class:middle
