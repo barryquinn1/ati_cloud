@@ -279,8 +279,8 @@ class:middle
 # Taxonomy of parallel computing
 .pull-left.acid[Parallel computing problems in contrast to serial computing problems, refer to the type of problem that can be divided into small Jobs which can be processed simultaneously ]
 .pull-right[
-**embarrassingly parallel computing**:
-```{r embar_parallel,echo=FALSE}
+
+```{r embar_parallel,echo=FALSE,fig.cap="**embarrassingly parallel computing**"}
 DiagrammeR::grViz("
 digraph rmarkdown {
 'Input Data'->{Job1,Job2,Job3}
@@ -292,8 +292,8 @@ digraph rmarkdown {
 
 ```
 
-**nonembarrassingly parallel computing**:
-```{r nonembar_parallel,echo=FALSE}
+
+```{r nonembar_parallel,echo=FALSE,fig.cap="**nonembarrassingly parallel computing**"}
 DiagrammeR::grViz("
 digraph rmarkdown {
 'Input Data'->{Job1,Job2,Job3}
@@ -314,8 +314,7 @@ class:top
 
 .pull-left[
 
-#### Figure 1: embarrassingly parallel computing
-```{r embar_parallel1,echo=FALSE}
+```{r embar_parallel1,echo=FALSE,fig.cap="Figure 1: embarrassingly parallel computing"}
 DiagrammeR::grViz("
 digraph rmarkdown {
 'Input Data'->{Job1,Job2,Job3}
@@ -327,8 +326,7 @@ digraph rmarkdown {
 
 ```
 
-#### Figure 2: snonembarrassingly parallel computing
-```{r nonembar_parallel1,echo=FALSE}
+```{r nonembar_parallel1,echo=FALSE,fig.cap="Figure 2: nonembarrassingly parallel computing"}
 DiagrammeR::grViz("
 digraph rmarkdown {
 'Input Data'->{Job1,Job2,Job3}

@@ -277,13 +277,19 @@ class:middle
 # Taxonomy of parallel computing
 .pull-left.acid[Parallel computing problems in contrast to serial computing problems, refer to the type of problem that can be divided into small Jobs which can be processed simultaneously ]
 .pull-right[
-**embarrassingly parallel computing**:
-<div id="htmlwidget-ae5a83457bef6d1a92f1" style="width:504px;height:200px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ae5a83457bef6d1a92f1">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 
-**nonembarrassingly parallel computing**:
-<div id="htmlwidget-f6240517d769cf7bd0e6" style="width:504px;height:200px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-f6240517d769cf7bd0e6">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\nJob1->Job2[dir=\"both\",label=\"Information\",style=\"dashed\"]\nJob2->Job3[dir=\"both\",label=\"Information\",style=\"dashed\"]\n{rank=same; Job1;Job2;Job3}\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+&lt;div class="figure"&gt;
+<div id="htmlwidget-8261ad342d13b04fa58f" style="width:504px;height:200px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8261ad342d13b04fa58f">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+&lt;p class="caption"&gt;**embarrassingly parallel computing**&lt;/p&gt;
+&lt;/div&gt;
+
+
+&lt;div class="figure"&gt;
+<div id="htmlwidget-574b53208ab2fa56b373" style="width:504px;height:200px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-574b53208ab2fa56b373">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\nJob1->Job2[dir=\"both\",label=\"Information\",style=\"dashed\"]\nJob2->Job3[dir=\"both\",label=\"Information\",style=\"dashed\"]\n{rank=same; Job1;Job2;Job3}\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+&lt;p class="caption"&gt;**nonembarrassingly parallel computing**&lt;/p&gt;
+&lt;/div&gt;
 ]
 ---
 class:top
@@ -292,13 +298,17 @@ class:top
 
 .pull-left[
 
-#### Figure 1: embarrassingly parallel computing
-<div id="htmlwidget-52f59cb5f027111824f9" style="width:504px;height:200px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-52f59cb5f027111824f9">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+&lt;div class="figure"&gt;
+<div id="htmlwidget-f3a056190bc2afb545b1" style="width:504px;height:200px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f3a056190bc2afb545b1">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+&lt;p class="caption"&gt;Figure 1: embarrassingly parallel computing&lt;/p&gt;
+&lt;/div&gt;
 
-#### Figure 2: snonembarrassingly parallel computing
-<div id="htmlwidget-088b1a98d58561d349b2" style="width:504px;height:200px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-088b1a98d58561d349b2">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\nJob1->Job2[dir=\"both\",label=\"Information\",style=\"dashed\"]\nJob2->Job3[dir=\"both\",label=\"Information\",style=\"dashed\"]\n{rank=same; Job1;Job2;Job3}\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+&lt;div class="figure"&gt;
+<div id="htmlwidget-66a46e0fab95376f840d" style="width:504px;height:200px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-66a46e0fab95376f840d">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\nJob1->Job2[dir=\"both\",label=\"Information\",style=\"dashed\"]\nJob2->Job3[dir=\"both\",label=\"Information\",style=\"dashed\"]\n{rank=same; Job1;Job2;Job3}\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+&lt;p class="caption"&gt;Figure 2: nonembarrassingly parallel computing&lt;/p&gt;
+&lt;/div&gt;
 ]
 .pull-right[
 -  Based on the dependence structure of sub-Jobs problems parallel computing problems can be further classified into *embarrassingly parallel* and  *non embarrassingly parallel*
@@ -318,8 +328,8 @@ class:inverse
 class:middle,left
 # The serial-parallel scale
 .left-column[
-<div id="htmlwidget-ee100638da7cf62b7ccd" style="width:504px;height:400px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ee100638da7cf62b7ccd">{"x":{"diagram":"\ndigraph  {\ngraph [label=\"Figure 1: Inherently serial\"]\n\"Input Data\"->Job1->\"Results\"->Job2->\"More Results\"->Job3\n} \n","config":{"engine":"dot","options":"margin: auto !important;"}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-c29b90f5d3d57c978328" style="width:504px;height:400px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c29b90f5d3d57c978328">{"x":{"diagram":"\ndigraph  {\ngraph [label=\"Figure 1: Inherently serial\"]\n\"Input Data\"->Job1->\"Results\"->Job2->\"More Results\"->Job3\n} \n","config":{"engine":"dot","options":"margin: auto !important;"}},"evals":[],"jsHooks":[]}</script>
 ]
 
 .right-column[
@@ -463,7 +473,7 @@ average_py(n)
 ```
 
 ```
-## 0.49959589163149803
+## 0.499717070059419
 ```
 
 ```python
@@ -472,7 +482,7 @@ print("Elapsed time in seconds:",t_end-t_start)
 ```
 
 ```
-## Elapsed time in seconds: 0.23793318699999944
+## Elapsed time in seconds: 0.24026845299999877
 ```
 
 ]
@@ -508,7 +518,7 @@ average_np(n)
 ```
 
 ```
-## 0.5005838385800186
+## 0.4999261655160858
 ```
 
 ```python
@@ -517,7 +527,7 @@ print("Elapsed time in seconds:",t_end-t_start)
 ```
 
 ```
-## Elapsed time in seconds: 0.05380994600000122
+## Elapsed time in seconds: 0.040460533000000964
 ```
 
 ]
@@ -586,7 +596,7 @@ print("Elapsed time in seconds:",t_end-t_start)
 ```
 
 ```
-## Elapsed time in seconds: 0.26921924600000047
+## Elapsed time in seconds: 0.2828835279999993
 ```
 
 
@@ -648,7 +658,7 @@ print("Elapsed time in seconds:",t_end-t_start)
 ```
 
 ```
-## Elapsed time in seconds: 0.4519200880000014
+## Elapsed time in seconds: 0.47104323300000317
 ```
 
 - In this instance this is not faster than the base Python code.
@@ -680,7 +690,7 @@ print("Elapsed time in seconds:",t_end-t_start)
 ```
 
 ```
-## Elapsed time in seconds: 1.0174550840000016
+## Elapsed time in seconds: 1.0274055879999935
 ```
 ]
 .panel[.panel-name[second run]
@@ -696,7 +706,7 @@ print("Elapsed time in seconds:",t_end-t_start)
 ```
 
 ```
-## Elapsed time in seconds: 0.036511817000000946
+## Elapsed time in seconds: 0.03679421800001137
 ```
 
 - After compilation `Numba` is much faster than `Numpy`
@@ -736,7 +746,7 @@ print("Elapsed time in seconds:",t_end-t_start)
 ```
 
 ```
-## Elapsed time in seconds: 0.030282201999998648
+## Elapsed time in seconds: 0.04978146999999922
 ```
 
 - .heatinline[In this instance there is no more speed-up to be observed.]
