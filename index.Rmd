@@ -230,7 +230,7 @@ class:top,center
 .pull-left[ 
 ### Steps
 1. Open a web browser
-2. Navigate to: http://q-rap.qub.ac.uk:8787/
+2. Navigate to: http://q-rap.qub.ac.uk/rstudio
 3. login using the credential provided
 
 .heatinline[Note that these credentials are private and can only be accessed by the administrator (Me)]
@@ -246,7 +246,7 @@ class:top,center
 .pull-left[ 
 ### Steps
 1. Open a web browser
-2. Navigate to: http://q-rap.qub.ac.uk
+2. Navigate to: http://q-rap.qub.ac.uk/rsconnect
 3. Create an account using your <NAME>@qub.ac.uk email
 4. Use a recognisable username that identifies you, for example `barry-quinn`
 ]

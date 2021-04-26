@@ -228,7 +228,7 @@ class:top,center
 .pull-left[ 
 ### Steps
 1. Open a web browser
-2. Navigate to: http://q-rap.qub.ac.uk:8787/
+2. Navigate to: http://q-rap.qub.ac.uk/rstudio
 3. login using the credential provided
 
 .heatinline[Note that these credentials are private and can only be accessed by the administrator (Me)]
@@ -244,7 +244,7 @@ class:top,center
 .pull-left[ 
 ### Steps
 1. Open a web browser
-2. Navigate to: http://q-rap.qub.ac.uk
+2. Navigate to: http://q-rap.qub.ac.uk/rsconnect
 3. Create an account using your &lt;NAME&gt;@qub.ac.uk email
 4. Use a recognisable username that identifies you, for example `barry-quinn`
 ]
@@ -278,12 +278,12 @@ class:middle
 .pull-left.acid[Parallel computing problems in contrast to serial computing problems, refer to the type of problem that can be divided into small Jobs which can be processed simultaneously ]
 .pull-right[
 **embarrassingly parallel computing**:
-<div id="htmlwidget-fab4657c667e3d079110" style="width:504px;height:200px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-fab4657c667e3d079110">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-ae5a83457bef6d1a92f1" style="width:504px;height:200px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ae5a83457bef6d1a92f1">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 
 **nonembarrassingly parallel computing**:
-<div id="htmlwidget-f15c8d8e0a4dc37c6c31" style="width:504px;height:200px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-f15c8d8e0a4dc37c6c31">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\nJob1->Job2[dir=\"both\",label=\"Information\",style=\"dashed\"]\nJob2->Job3[dir=\"both\",label=\"Information\",style=\"dashed\"]\n{rank=same; Job1;Job2;Job3}\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-f6240517d769cf7bd0e6" style="width:504px;height:200px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f6240517d769cf7bd0e6">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\nJob1->Job2[dir=\"both\",label=\"Information\",style=\"dashed\"]\nJob2->Job3[dir=\"both\",label=\"Information\",style=\"dashed\"]\n{rank=same; Job1;Job2;Job3}\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 ]
 ---
 class:top
@@ -293,12 +293,12 @@ class:top
 .pull-left[
 
 #### Figure 1: embarrassingly parallel computing
-<div id="htmlwidget-a10f159ad1725c16bade" style="width:504px;height:200px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-a10f159ad1725c16bade">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-52f59cb5f027111824f9" style="width:504px;height:200px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-52f59cb5f027111824f9">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 
 #### Figure 2: snonembarrassingly parallel computing
-<div id="htmlwidget-68bb7179ddde3a6e3214" style="width:504px;height:200px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-68bb7179ddde3a6e3214">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\nJob1->Job2[dir=\"both\",label=\"Information\",style=\"dashed\"]\nJob2->Job3[dir=\"both\",label=\"Information\",style=\"dashed\"]\n{rank=same; Job1;Job2;Job3}\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-088b1a98d58561d349b2" style="width:504px;height:200px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-088b1a98d58561d349b2">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\nJob1->Job2[dir=\"both\",label=\"Information\",style=\"dashed\"]\nJob2->Job3[dir=\"both\",label=\"Information\",style=\"dashed\"]\n{rank=same; Job1;Job2;Job3}\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 ]
 .pull-right[
 -  Based on the dependence structure of sub-Jobs problems parallel computing problems can be further classified into *embarrassingly parallel* and  *non embarrassingly parallel*
@@ -318,8 +318,8 @@ class:inverse
 class:middle,left
 # The serial-parallel scale
 .left-column[
-<div id="htmlwidget-b5f5034046dbd9803fd8" style="width:504px;height:400px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b5f5034046dbd9803fd8">{"x":{"diagram":"\ndigraph  {\ngraph [label=\"Figure 1: Inherently serial\"]\n\"Input Data\"->Job1->\"Results\"->Job2->\"More Results\"->Job3\n} \n","config":{"engine":"dot","options":"margin: auto !important;"}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-ee100638da7cf62b7ccd" style="width:504px;height:400px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ee100638da7cf62b7ccd">{"x":{"diagram":"\ndigraph  {\ngraph [label=\"Figure 1: Inherently serial\"]\n\"Input Data\"->Job1->\"Results\"->Job2->\"More Results\"->Job3\n} \n","config":{"engine":"dot","options":"margin: auto !important;"}},"evals":[],"jsHooks":[]}</script>
 ]
 
 .right-column[
@@ -463,7 +463,7 @@ average_py(n)
 ```
 
 ```
-## 0.5000956397686457
+## 0.49959589163149803
 ```
 
 ```python
@@ -472,7 +472,7 @@ print("Elapsed time in seconds:",t_end-t_start)
 ```
 
 ```
-## Elapsed time in seconds: 0.24935405100000096
+## Elapsed time in seconds: 0.23793318699999944
 ```
 
 ]
@@ -508,7 +508,7 @@ average_np(n)
 ```
 
 ```
-## 0.49983693583286565
+## 0.5005838385800186
 ```
 
 ```python
@@ -517,7 +517,7 @@ print("Elapsed time in seconds:",t_end-t_start)
 ```
 
 ```
-## Elapsed time in seconds: 0.05276275299999966
+## Elapsed time in seconds: 0.05380994600000122
 ```
 
 ]
@@ -586,7 +586,7 @@ print("Elapsed time in seconds:",t_end-t_start)
 ```
 
 ```
-## Elapsed time in seconds: 0.26088966599999885
+## Elapsed time in seconds: 0.26921924600000047
 ```
 
 
@@ -648,7 +648,7 @@ print("Elapsed time in seconds:",t_end-t_start)
 ```
 
 ```
-## Elapsed time in seconds: 0.434210757999999
+## Elapsed time in seconds: 0.4519200880000014
 ```
 
 - In this instance this is not faster than the base Python code.
@@ -680,7 +680,7 @@ print("Elapsed time in seconds:",t_end-t_start)
 ```
 
 ```
-## Elapsed time in seconds: 1.006023343999999
+## Elapsed time in seconds: 1.0174550840000016
 ```
 ]
 .panel[.panel-name[second run]
@@ -696,7 +696,7 @@ print("Elapsed time in seconds:",t_end-t_start)
 ```
 
 ```
-## Elapsed time in seconds: 0.036273121999997215
+## Elapsed time in seconds: 0.036511817000000946
 ```
 
 - After compilation `Numba` is much faster than `Numpy`
@@ -736,7 +736,7 @@ print("Elapsed time in seconds:",t_end-t_start)
 ```
 
 ```
-## Elapsed time in seconds: 0.028640142000000424
+## Elapsed time in seconds: 0.030282201999998648
 ```
 
 - .heatinline[In this instance there is no more speed-up to be observed.]
