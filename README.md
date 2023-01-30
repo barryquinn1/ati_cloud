@@ -1,2 +1,2 @@
-# High performacne computing in finance
+# High performance computing in finance
 This repo contains slides using in algorithmic trading and investment
