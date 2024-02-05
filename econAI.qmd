@@ -1,0 +1,146 @@
+---
+title: "economics of AI"
+author: "Barry"
+format: revealjs
+editor: visual
+---
+
+
+---
+class:middle 
+## The economics of AI tools in Business
+
+- Much like the semiconductor reduced the cost of arithmetic , recent advances in AI make the task of prediction abundant and inexpensive.  
+- Advancements have been built around the rubric of machine learning where recent developments in algorithms, computational speed, data storage, and data retrieval have combined to reduce the cost of machine learning predictions.
+- The successful deployment of AI tools requires an insight into how best to insert AI into the workflow of a company.  
+
+---
+class:inverse
+## Consulting example
+.pull-left[
+- Recently, myself and Dr Byron Graham we recently involved in an consultation exercise on price intelligence for a global price comparison company
+- .heatinline[Pricing intelligence involves monitoring competitor prices and updating prices accordingly 
+- We we tasked with outlining how to using Machine Learning techniques to improve and scale their current legacy software.
+- Opposite is the workflow of the legacy system.
+]
+]
+.pull-right[
+![](img/workflow_pricecompare.png)
+]
+---
+class:middle
+## Consulting example
+.pull-left[
+![](img/workflow_pricecompare.png)
+]
+.pull-right[
+- Firstly, the workflow should be broken down into "jobs" or "tasks".  
+- Each of these tasks usually has a human decision or action attached, which has the potential to be automated via an AI tool.  
+- For instance, in figure 1 the company's workflow has two critical decisions:
+  1. Given a URL, where on the web page is the product price located?
+  2. How can the price be efficiently and dynamically retrieved?
+]
+
+---
+class:inverse
+## Economics of AI: Corporate strategy
+
+.heatinline[
+-  A successful corporate AI strategy requires clear and meaningful decomposition of the workflow.
+- Each task in the workflow needs to be decomposed in order to see where AI prediction can be inserted.  
+- This, in turn, allows estimation of the benefit of enhanced prediction and the cost of generating that prediction.  
+- Once reasonable estimates have been made, the potential AI projects can be rank-ordered from highest to lowest return on investment(ROI).  
+- Management can then start at the top and implement AI tools as long as the expected ROI makes sense.
+]
+
+---
+class:middle
+## Economic of AI: Decomposing business decisions
+.pull-left[
+![](img/anatomy_of_a_task.png)
+]
+.pull-right[
+- Figure 2 illustrates the *anatomy of a task*, a diagram used by [Creative Destruction Labs](https://www.creativedestructionlab.com/ ) a world-leading incubator for successful AI start-ups
+
+- When someone makes a decision, they take input data from the world that enables a prediction. 
+- The prediction is made possible as training has occurred about relationships between different types of data and which data is most closely associated with a situation. 
+- A decision-maker would then combine the prediction with judgement (based on intuition and experience) on what matters to choose appropriate action.  
+- The action leads to an outcome which has an associated payoff or reward. 
+]
+
+---
+class:middle
+## Economic of AI: Decomposing business decisions
+.pull-left[
+![](img/anatomy_of_a_task.png)
+]
+.pull-right[
+- The outcome is the consequence of the decision. 
+- It is needed to provide a complete picture. 
+- The outcome may also provide feedback to help improve the next prediction.  
+- And thus, the cycle of the task repeats.  
+]
+
+---
+class:middle
+## Economic of AI: Decomposing business decisions
+.pull-left[
+![](img/anatomy_of_a_task.png)
+
+]
+
+.pull-right[
+- Reframing decisions in this way places prediction at the centre of the task. 
+- The process has three different types of data, input, training and feedback. 
+- As there is uncertainty around all prediction, you need judgement when prediction turns out to be wrong.  
+- Judgement involves determining the relative payoff associated with each possible outcome, including those with **correct** decisions as well as those associated with mistakes.  
+
+- Uncertainty increases the cost of judging the payoffs for a given decision. 
+- Observed outcomes can be used as feedback to inform the next prediction.  
+]
+---
+class:middle
+## Economic of AI: Decomposing business decisions
+.pull-left[
+
+![](img/anatomy_of_a_task.png)
+
+]
+
+.pull-right[
+
+- By breaking up a decision into elements, we can think about which parts of the human activities will diminish in value and which will increase as a result of enhanced machine prediction.  
+
+--
+
+- As machines substitute for humans in prediction, the value of human prediction will decline. 
+
+--
+
+- Importantly, the other elements of a decision – judgement, data, action – remain, firmly placed in the human domain. 
+
+--
+
+- These are complements to prediction, which means that their value will increase as prediction becomes cheaper. 
+
+--
+
+-In this way, AI tools can create opportunities to exploit expertise in judgement where previously human predictions were so poor as to avoid any decision making (for example, where the default option is always accepted).  
+
+--
+
+- In this case, the demand for human judgement will increase.
+
+]
+---
+class:middle
+# Terminology   
+```{r glossary, echo=FALSE}
+library(kableExtra)
+tibble(Term=c("Computing instances"," Data center","Middelware", "Virtualisation","Cloud bursting","Elastic computing","Wall clock time(WCT)","CPU time"),
+       Explanation=c("Refers to a (virtual) server instance that is linked to a computing network to provide computing resource. To offer flexibility to their customers, cloud vendors offer different types of nodes that comprise various combinations of CPU (central processing unit), memory, storage, and networking capacity","A data center comprises a large number of computing nodes and necessary facilities to house the computer system","is the computer software that *glues* software applications with computing hardware. In cloud computing, middleware is used to enable communication and management data","Using computer resources to imitate other computer resources. By virtualisation, users are not locked with specific operating systems, CPU architecture, etc. Middleware and virtualisation are particularly important to ensure on-demand self-service of cloud computing","Cloud computing offers on-demand service. Cloud bursting refers to the process of dynamic deployment of software applications","is a computing service which has the ability to scale resources to meet requirements, e.g. Amazon's EC2 instances","is the human perception of the passage of time from the start to the completion of a task","The amount of time for which a CPU was used for processing instructions of a computer program or operating system, as opposed to, for example, waiting for input/output(I/O) operations or entering low-power (idle) mode.")) %>%
+  kbl() %>%
+  kable_paper() %>%
+  scroll_box(width = "100%", height = "400px")
+```
+

@@ -1,10 +1,10 @@
 ---
-title: "FIN7030:Algorithmic trading and investment"
-subtitle: "High performance cloud computing in finance"
+title: "High performance cloud computing in finance"
+subtitle: "AI and Trading (FIN7030)"
 author: "Barry Quinn"
-date: "20/12/2020 (updated `r Sys.Date()`)"
 output:
   xaringan::moon_reader:
+    logo: img/qbslogo.png
     css: ["fonts.css","default", "mycssblend.css"]
     lib_dir: libs
     nature:
@@ -20,6 +20,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
+reticulate::use_condaenv("pymc_jax_metal")
 library(htmltools)
 options(htmltools.dir.version = FALSE)
 library(knitr)
@@ -57,8 +58,7 @@ xaringanExtra::use_extra_styles(
 ```
 
 layout: true
-  
-<div class="my-footer"><span>quinference.com</span></div>
+
 
 ---
 class:inverse
@@ -67,7 +67,6 @@ class:inverse
 - .fat[Introduction to the Q-RaP]
 - .acid[Taxonomy of parallel computing]
 - .heat[Performance computing in Python]
-- .glow[The economics of AI in business]
 ---
 
 class:middle
@@ -172,98 +171,6 @@ background-size: cover
 class:middle
 background-image: url(img/t2.png)
 background-size: cover
----
-class: middle
-## QMS Remote analytics Platform (Q-RaP)
-
-- We have recently introduced state-of-the-art cloud computing teaching for the masters students in the Management School
-
-- We have built a high-performance virtual machine in the Azure cloud to expose students to the production-level technologies they will experience in industry.
-
-- SPECIFICATION: A Linux (ubuntu 18.04) operating system (the most popular OS) with 64 vCPUs, 256 GiB of RAM.
-
-- This will allows us to teach 64-128 students concurrently (with toy computational tasks with each student limited to 1vCPU and 4 GiB RAM)
-
----
-class:inverse,top
-## Knowledge Gap in *Quant Finance* Industry
-
-<img src="img/gap.jpg" class="center" width="40%">
-
----
-class:middle
-# Q-RaP software
-.pull-left[
-- To help fill this gap we will be using the last production level software on  Q-RaP.
-
-- This be preliminary through the RStudio professional product range
-
-<img src="img/RStudio-Logo.png" width="50%" class="center">
-
-]
-.pull-right[
-- Programming language knowledge is like a fashion accessory; picking a language to learning over all others can mean you are out of fashion very quick
-
-- When first learning to code it is much better to learning how to integrate languages on a agile platform.
-- `r fa(name="r-project")` is an interoperable language with widespread connectivity
-
-<img src="img/interoperableR.png" width="80%" class="center">]
-
-.heatinline[`r fa(name="r-project")` is design as an interperable language connecting many software]
-
----
-class:middle
-# Q-RaP software
-
-- The user interface on the server will be power by Rstudio Team Product, the industry version of the free Rstudio IDE for R.
-
-- .fatinline[Learning to integrate programming languages as a quant finance professional is part of the communicative bridge building needed to close the gap between complex models and financial decisions]
-
-- From this product suite we will be using [RStudio Server Pro](https://rstudio.com/products/rstudio-server-pro/) and RStudio connect
-
->Rstudio Server Pro is the preferred data analysis and integrated development experience for professional R users and data science teams who use R and Python. `r tufte::quote_footer("RStudio Team, 2020")`
-
----
-class:top,center
-# Accessing RStudio on Q-RaP
-
-.pull-left[ 
-### Steps
-1. Open a web browser
-2. Navigate to: http://q-rap.qub.ac.uk/rstudio
-3. login using the credential provided
-
-.heatinline[Note that these credentials are private and can only be accessed by the administrator (Me)]
-]
-.pull-right[ 
-<img src="img/qms_rstudio_login.png" alt="server_login" >
-
-]
----
-class:top,center
-# Accessing Rstudio Connect on Q-RaP
-
-.pull-left[ 
-### Steps
-1. Open a web browser
-2. Navigate to: http://q-rap.qub.ac.uk/rsconnect
-3. Create an account using your <NAME>@qub.ac.uk email
-4. Use a recognisable username that identifies you, for example `barry-quinn`
-]
-.pull-right[ 
-<img src="img/rsconnect_hp.png" alt="connect_login" >
-
-]
-
-.fat[We will be using these resources extensively for both growth learning and assessment]
-
----
-class: middle,center
-background-image: url(img/title-slide-img.png)
-background-size: cover
-# A breathing break
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/PmBYdfv5RSk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ---
 class:middle
@@ -413,30 +320,6 @@ class:middle
 ]
 ---
 class:middle
-## Business reporting in `r fa('r-project')` for the `r fa(name = "user-ninja")` user
-.pull-left[
-
-###<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/rmarkdown.png" width="10%" style="float:left"/>&nbsp; R Markdown can be used to create: 
-
-- Reports (HTML, PDF, Word)
-- Slide Decks (HTML, PowerPoint)
-- Web Apps
-- Web Pages
-- Books
-- It is part of the `tidyverse` package
-
-![](https://d33wubrfki0l68.cloudfront.net/61d189fd9cdf955058415d3e1b28dd60e1bd7c9b/9791d/images/rmarkdownflow.png)
-]
-.pull-right[ 
-### Your turn
-- Go to server, login in and create new session
-- Create a `RMarkdown` file by *File > New File > R Markdown*
-
-<img src="img/qms_rstudio_rmarkdown.png" alt="rmarkdown",height="100"/>
-]
-
----
-class:middle
 ### R Python Interface <img src="img/reticulated_python.png" width="10%" style="float:right"/>the `reticulate` package
 
 - In your `Rmd` file, insert a `R code chunk` by clicking Insert and selecting R 
@@ -451,7 +334,7 @@ library(reticulate)
 
 ```{python}
 print("Hello World")
-````
+```
 
 ---
 class:middle
@@ -601,9 +484,6 @@ t_end=process_time()
 print("Elapsed time in seconds:",t_end-t_start)
 ```
 
-
-
-
 ]
 .panel[.panel-name[Plot 1000 Price Paths in R]
 .pull-left[
@@ -721,15 +601,17 @@ class: middle
 
 - .saltinline[The following code makes use of the `multiprocessing` module and divides the total number of paths to be simulated into small chunks of size $I/p$, where $p>0$]
 
-```{python}
+```{python, eval=FALSE}
+
 import multiprocessing as mp
-pool = mp.Pool(processes=8)
+pool = mp.Pool(processes=4)
 p=10
 ```
 
 - .saltinline[After all the single tasks are finished, the results are put together in a single `ndarray` object using `np.stack`]
 
-```{python}
+```{python, eval=FALSE}
+
 t_start=process_time()
 S= np.hstack(pool.map(mcs_simulation_np,p*[(M,int(I/p))]))
 t_end=process_time()
@@ -739,142 +621,3 @@ print("Elapsed time in seconds:",t_end-t_start)
 - .heatinline[In this instance there is no more speed-up to be observed.]
 ]
 ]
-
----
-class:middle 
-## The economics of AI tools in Business
-
-- Much like the semiconductor reduced the cost of arithmetic , recent advances in AI make the task of prediction abundant and inexpensive.  
-- Advancements have been built around the rubric of machine learning where recent developments in algorithms, computational speed, data storage, and data retrieval have combined to reduce the cost of machine learning predictions.
-- The successful deployment of AI tools requires an insight into how best to insert AI into the workflow of a company.  
-
----
-class:inverse
-## Consulting example
-.pull-left[
-- Recently, myself and Dr Byron Graham we recently involved in an consultation exercise on price intelligence for a global price comparison company
-- .heatinline[Pricing intelligence involves monitoring competitor prices and updating prices accordingly 
-- We we tasked with outlining how to using Machine Learning techniques to improve and scale their current legacy software.
-- Opposite is the workflow of the legacy system.
-]
-]
-.pull-right[
-![](img/workflow_pricecompare.png)
-]
----
-class:middle
-## Consulting example
-.pull-left[
-![](img/workflow_pricecompare.png)
-]
-.pull-right[
-- Firstly, the workflow should be broken down into "jobs" or "tasks".  
-- Each of these tasks usually has a human decision or action attached, which has the potential to be automated via an AI tool.  
-- For instance, in figure 1 the company's workflow has two critical decisions:
-  1. Given a URL, where on the web page is the product price located?
-  2. How can the price be efficiently and dynamically retrieved?
-]
-
----
-class:inverse
-## Economics of AI: Corporate strategy
-
-.heatinline[
--  A successful corporate AI strategy requires clear and meaningful decomposition of the workflow.
-- Each task in the workflow needs to be decomposed in order to see where AI prediction can be inserted.  
-- This, in turn, allows estimation of the benefit of enhanced prediction and the cost of generating that prediction.  
-- Once reasonable estimates have been made, the potential AI projects can be rank-ordered from highest to lowest return on investment(ROI).  
-- Management can then start at the top and implement AI tools as long as the expected ROI makes sense.
-]
-
----
-class:middle
-## Economic of AI: Decomposing business decisions
-.pull-left[
-![](img/anatomy_of_a_task.png)
-]
-.pull-right[
-- Figure 2 illustrates the *anatomy of a task*, a diagram used by [Creative Destruction Labs](https://www.creativedestructionlab.com/ ) a world-leading incubator for successful AI start-ups
-
-- When someone makes a decision, they take input data from the world that enables a prediction. 
-- The prediction is made possible as training has occurred about relationships between different types of data and which data is most closely associated with a situation. 
-- A decision-maker would then combine the prediction with judgement (based on intuition and experience) on what matters to choose appropriate action.  
-- The action leads to an outcome which has an associated payoff or reward. 
-]
-
----
-class:middle
-## Economic of AI: Decomposing business decisions
-.pull-left[
-![](img/anatomy_of_a_task.png)
-]
-.pull-right[
-- The outcome is the consequence of the decision. 
-- It is needed to provide a complete picture. 
-- The outcome may also provide feedback to help improve the next prediction.  
-- And thus, the cycle of the task repeats.  
-]
-
----
-class:middle
-## Economic of AI: Decomposing business decisions
-.pull-left[
-![](img/anatomy_of_a_task.png)
-
-]
-
-.pull-right[
-- Reframing decisions in this way places prediction at the centre of the task. 
-- The process has three different types of data, input, training and feedback. 
-- As there is uncertainty around all prediction, you need judgement when prediction turns out to be wrong.  
-- Judgement involves determining the relative payoff associated with each possible outcome, including those with **correct** decisions as well as those associated with mistakes.  
-
-- Uncertainty increases the cost of judging the payoffs for a given decision. 
-- Observed outcomes can be used as feedback to inform the next prediction.  
-]
----
-class:middle
-## Economic of AI: Decomposing business decisions
-.pull-left[
-
-![](img/anatomy_of_a_task.png)
-
-]
-
-.pull-right[
-
-- By breaking up a decision into elements, we can think about which parts of the human activities will diminish in value and which will increase as a result of enhanced machine prediction.  
-
---
-
-- As machines substitute for humans in prediction, the value of human prediction will decline. 
-
---
-
-- Importantly, the other elements of a decision – judgement, data, action – remain, firmly placed in the human domain. 
-
---
-
-- These are complements to prediction, which means that their value will increase as prediction becomes cheaper. 
-
---
-
--In this way, AI tools can create opportunities to exploit expertise in judgement where previously human predictions were so poor as to avoid any decision making (for example, where the default option is always accepted).  
-
---
-
-- In this case, the demand for human judgement will increase.
-
-]
----
-class:middle
-# Terminology   
-```{r glossary, echo=FALSE}
-library(kableExtra)
-tibble(Term=c("Computing instances"," Data center","Middelware", "Virtualisation","Cloud bursting","Elastic computing","Wall clock time(WCT)","CPU time"),
-       Explanation=c("Refers to a (virtual) server instance that is linked to a computing network to provide computing resource. To offer flexibility to their customers, cloud vendors offer different types of nodes that comprise various combinations of CPU (central processing unit), memory, storage, and networking capacity","A data center comprises a large number of computing nodes and necessary facilities to house the computer system","is the computer software that *glues* software applications with computing hardware. In cloud computing, middleware is used to enable communication and management data","Using computer resources to imitate other computer resources. By virtualisation, users are not locked with specific operating systems, CPU architecture, etc. Middleware and virtualisation are particularly important to ensure on-demand self-service of cloud computing","Cloud computing offers on-demand service. Cloud bursting refers to the process of dynamic deployment of software applications","is a computing service which has the ability to scale resources to meet requirements, e.g. Amazon's EC2 instances","is the human perception of the passage of time from the start to the completion of a task","The amount of time for which a CPU was used for processing instructions of a computer program or operating system, as opposed to, for example, waiting for input/output(I/O) operations or entering low-power (idle) mode.")) %>%
-  kbl() %>%
-  kable_paper() %>%
-  scroll_box(width = "100%", height = "400px")
-```
-

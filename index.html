@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>FIN7030:Algorithmic trading and investment</title>
+    <title>High performance cloud computing in finance</title>
     <meta charset="utf-8" />
     <meta name="author" content="Barry Quinn" />
     <script src="libs/header-attrs/header-attrs.js"></script>
@@ -23,8 +23,6 @@
     <link href="libs/DiagrammeR-styles/styles.css" rel="stylesheet" />
     <script src="libs/grViz-binding/grViz.js"></script>
     <link href="libs/tachyons/tachyons.min.css" rel="stylesheet" />
-    <script src="libs/kePrint/kePrint.js"></script>
-    <link href="libs/lightable/lightable.css" rel="stylesheet" />
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
         TeX: { equationNumbers: { autoNumber: "AMS" } },
@@ -44,10 +42,15 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# FIN7030:Algorithmic trading and investment
-## High performance cloud computing in finance
+.title[
+# High performance cloud computing in finance
+]
+.subtitle[
+## AI and Trading (FIN7030)
+]
+.author[
 ### Barry Quinn
-### 20/12/2020 (updated 2021-04-26)
+]
 
 ---
 
@@ -55,8 +58,7 @@ class: center, middle, inverse, title-slide
 
 
 layout: true
-  
-&lt;div class="my-footer"&gt;&lt;span&gt;quinference.com&lt;/span&gt;&lt;/div&gt;
+
 
 ---
 class:inverse
@@ -65,7 +67,6 @@ class:inverse
 - .fat[Introduction to the Q-RaP]
 - .acid[Taxonomy of parallel computing]
 - .heat[Performance computing in Python]
-- .glow[The economics of AI in business]
 ---
 
 class:middle
@@ -75,7 +76,7 @@ background-size: cover
 ## Introduction
 .pull-left-2[
 - This course will expose you to the flexibility of cloud computing
-- We will learn how to build agile analytics by combining &lt;svg style="height:0.8em;top:.04em;position:relative;" viewBox="0 0 581 512"&gt;&lt;path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/&gt;&lt;/svg&gt; &lt;svg style="height:0.8em;top:.04em;position:relative;" viewBox="0 0 448 512"&gt;&lt;path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/&gt;&lt;/svg&gt; &lt;svg style="height:0.8em;top:.04em;position:relative;" viewBox="0 0 448 512"&gt;&lt;path d="M439.8 200.5c-7.7-30.9-22.3-54.2-53.4-54.2h-40.1v47.4c0 36.8-31.2 67.8-66.8 67.8H172.7c-29.2 0-53.4 25-53.4 54.3v101.8c0 29 25.2 46 53.4 54.3 33.8 9.9 66.3 11.7 106.8 0 26.9-7.8 53.4-23.5 53.4-54.3v-40.7H226.2v-13.6h160.2c31.1 0 42.6-21.7 53.4-54.2 11.2-33.5 10.7-65.7 0-108.6zM286.2 404c11.1 0 20.1 9.1 20.1 20.3 0 11.3-9 20.4-20.1 20.4-11 0-20.1-9.2-20.1-20.4.1-11.3 9.1-20.3 20.1-20.3zM167.8 248.1h106.8c29.7 0 53.4-24.5 53.4-54.3V91.9c0-29-24.4-50.7-53.4-55.6-35.8-5.9-74.7-5.6-106.8.1-45.2 8-53.4 24.7-53.4 55.6v40.7h106.9v13.6h-147c-31.1 0-58.3 18.7-66.8 54.2-9.8 40.7-10.2 66.1 0 108.6 7.6 31.6 25.7 54.2 56.8 54.2H101v-48.8c0-35.3 30.5-66.4 66.8-66.4zm-6.7-142.6c-11.1 0-20.1-9.1-20.1-20.3.1-11.3 9-20.4 20.1-20.4 11 0 20.1 9.2 20.1 20.4s-9 20.3-20.1 20.3z"/&gt;&lt;/svg&gt; 
+- We will learn how to build agile analytics by combining <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> <svg aria-hidden="true" role="img" viewBox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg> <svg aria-hidden="true" role="img" viewBox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M439.8 200.5c-7.7-30.9-22.3-54.2-53.4-54.2h-40.1v47.4c0 36.8-31.2 67.8-66.8 67.8H172.7c-29.2 0-53.4 25-53.4 54.3v101.8c0 29 25.2 46 53.4 54.3 33.8 9.9 66.3 11.7 106.8 0 26.9-7.8 53.4-23.5 53.4-54.3v-40.7H226.2v-13.6h160.2c31.1 0 42.6-21.7 53.4-54.2 11.2-33.5 10.7-65.7 0-108.6zM286.2 404c11.1 0 20.1 9.1 20.1 20.3 0 11.3-9 20.4-20.1 20.4-11 0-20.1-9.2-20.1-20.4.1-11.3 9.1-20.3 20.1-20.3zM167.8 248.1h106.8c29.7 0 53.4-24.5 53.4-54.3V91.9c0-29-24.4-50.7-53.4-55.6-35.8-5.9-74.7-5.6-106.8.1-45.2 8-53.4 24.7-53.4 55.6v40.7h106.9v13.6h-147c-31.1 0-58.3 18.7-66.8 54.2-9.8 40.7-10.2 66.1 0 108.6 7.6 31.6 25.7 54.2 56.8 54.2H101v-48.8c0-35.3 30.5-66.4 66.8-66.4zm-6.7-142.6c-11.1 0-20.1-9.1-20.1-20.3.1-11.3 9-20.4 20.1-20.4 11 0 20.1 9.2 20.1 20.4s-9 20.3-20.1 20.3z"/></svg> 
 
 - Financial institutions have a long history of heavily investing in technology for gaining market share and defending their current position
 - The democratisation of computing processing power by cloud providers, has lead to an explosion in financial machine learning applications.
@@ -170,98 +171,6 @@ background-size: cover
 class:middle
 background-image: url(img/t2.png)
 background-size: cover
----
-class: middle
-## QMS Remote analytics Platform (Q-RaP)
-
-- We have recently introduced state-of-the-art cloud computing teaching for the masters students in the Management School
-
-- We have built a high-performance virtual machine in the Azure cloud to expose students to the production-level technologies they will experience in industry.
-
-- SPECIFICATION: A Linux (ubuntu 18.04) operating system (the most popular OS) with 64 vCPUs, 256 GiB of RAM.
-
-- This will allows us to teach 64-128 students concurrently (with toy computational tasks with each student limited to 1vCPU and 4 GiB RAM)
-
----
-class:inverse,top
-## Knowledge Gap in *Quant Finance* Industry
-
-&lt;img src="img/gap.jpg" class="center" width="40%"&gt;
-
----
-class:middle
-# Q-RaP software
-.pull-left[
-- To help fill this gap we will be using the last production level software on  Q-RaP.
-
-- This be preliminary through the RStudio professional product range
-
-&lt;img src="img/RStudio-Logo.png" width="50%" class="center"&gt;
-
-]
-.pull-right[
-- Programming language knowledge is like a fashion accessory; picking a language to learning over all others can mean you are out of fashion very quick
-
-- When first learning to code it is much better to learning how to integrate languages on a agile platform.
-- &lt;svg style="height:0.8em;top:.04em;position:relative;" viewBox="0 0 581 512"&gt;&lt;path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/&gt;&lt;/svg&gt; is an interoperable language with widespread connectivity
-
-&lt;img src="img/interoperableR.png" width="80%" class="center"&gt;]
-
-.heatinline[&lt;svg style="height:0.8em;top:.04em;position:relative;" viewBox="0 0 581 512"&gt;&lt;path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/&gt;&lt;/svg&gt; is design as an interperable language connecting many software]
-
----
-class:middle
-# Q-RaP software
-
-- The user interface on the server will be power by Rstudio Team Product, the industry version of the free Rstudio IDE for R.
-
-- .fatinline[Learning to integrate programming languages as a quant finance professional is part of the communicative bridge building needed to close the gap between complex models and financial decisions]
-
-- From this product suite we will be using [RStudio Server Pro](https://rstudio.com/products/rstudio-server-pro/) and RStudio connect
-
-&gt;Rstudio Server Pro is the preferred data analysis and integrated development experience for professional R users and data science teams who use R and Python. &lt;footer&gt;RStudio Team, 2020&lt;/footer&gt;
-
----
-class:top,center
-# Accessing RStudio on Q-RaP
-
-.pull-left[ 
-### Steps
-1. Open a web browser
-2. Navigate to: http://q-rap.qub.ac.uk/rstudio
-3. login using the credential provided
-
-.heatinline[Note that these credentials are private and can only be accessed by the administrator (Me)]
-]
-.pull-right[ 
-&lt;img src="img/qms_rstudio_login.png" alt="server_login" &gt;
-
-]
----
-class:top,center
-# Accessing Rstudio Connect on Q-RaP
-
-.pull-left[ 
-### Steps
-1. Open a web browser
-2. Navigate to: http://q-rap.qub.ac.uk/rsconnect
-3. Create an account using your &lt;NAME&gt;@qub.ac.uk email
-4. Use a recognisable username that identifies you, for example `barry-quinn`
-]
-.pull-right[ 
-&lt;img src="img/rsconnect_hp.png" alt="connect_login" &gt;
-
-]
-
-.fat[We will be using these resources extensively for both growth learning and assessment]
-
----
-class: middle,center
-background-image: url(img/title-slide-img.png)
-background-size: cover
-# A breathing break
-
-&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/PmBYdfv5RSk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
 
 ---
 class:middle
@@ -279,15 +188,15 @@ class:middle
 .pull-right[
 
 &lt;div class="figure"&gt;
-<div id="htmlwidget-8261ad342d13b04fa58f" style="width:504px;height:200px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-8261ad342d13b04fa58f">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-400411af2b96bb2c1f6c" style="width:504px;height:200px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-400411af2b96bb2c1f6c">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 &lt;p class="caption"&gt;**embarrassingly parallel computing**&lt;/p&gt;
 &lt;/div&gt;
 
 
 &lt;div class="figure"&gt;
-<div id="htmlwidget-574b53208ab2fa56b373" style="width:504px;height:200px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-574b53208ab2fa56b373">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\nJob1->Job2[dir=\"both\",label=\"Information\",style=\"dashed\"]\nJob2->Job3[dir=\"both\",label=\"Information\",style=\"dashed\"]\n{rank=same; Job1;Job2;Job3}\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-aec8e87efe7e010d4e9d" style="width:504px;height:200px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-aec8e87efe7e010d4e9d">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\nJob1->Job2[dir=\"both\",label=\"Information\",style=\"dashed\"]\nJob2->Job3[dir=\"both\",label=\"Information\",style=\"dashed\"]\n{rank=same; Job1;Job2;Job3}\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 &lt;p class="caption"&gt;**nonembarrassingly parallel computing**&lt;/p&gt;
 &lt;/div&gt;
 ]
@@ -299,14 +208,14 @@ class:top
 .pull-left[
 
 &lt;div class="figure"&gt;
-<div id="htmlwidget-f3a056190bc2afb545b1" style="width:504px;height:200px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-f3a056190bc2afb545b1">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-9730b6f4aa86ae36ca74" style="width:504px;height:200px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9730b6f4aa86ae36ca74">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 &lt;p class="caption"&gt;Figure 1: embarrassingly parallel computing&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;div class="figure"&gt;
-<div id="htmlwidget-66a46e0fab95376f840d" style="width:504px;height:200px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-66a46e0fab95376f840d">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\nJob1->Job2[dir=\"both\",label=\"Information\",style=\"dashed\"]\nJob2->Job3[dir=\"both\",label=\"Information\",style=\"dashed\"]\n{rank=same; Job1;Job2;Job3}\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-f396e149add3790cc276" style="width:504px;height:200px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f396e149add3790cc276">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\nJob1->Job2[dir=\"both\",label=\"Information\",style=\"dashed\"]\nJob2->Job3[dir=\"both\",label=\"Information\",style=\"dashed\"]\n{rank=same; Job1;Job2;Job3}\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 &lt;p class="caption"&gt;Figure 2: nonembarrassingly parallel computing&lt;/p&gt;
 &lt;/div&gt;
 ]
@@ -328,8 +237,8 @@ class:inverse
 class:middle,left
 # The serial-parallel scale
 .left-column[
-<div id="htmlwidget-c29b90f5d3d57c978328" style="width:504px;height:400px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-c29b90f5d3d57c978328">{"x":{"diagram":"\ndigraph  {\ngraph [label=\"Figure 1: Inherently serial\"]\n\"Input Data\"->Job1->\"Results\"->Job2->\"More Results\"->Job3\n} \n","config":{"engine":"dot","options":"margin: auto !important;"}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-4311ed7cc599c9b9e590" style="width:504px;height:400px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4311ed7cc599c9b9e590">{"x":{"diagram":"\ndigraph  {\ngraph [label=\"Figure 1: Inherently serial\"]\n\"Input Data\"->Job1->\"Results\"->Job2->\"More Results\"->Job3\n} \n","config":{"engine":"dot","options":"margin: auto !important;"}},"evals":[],"jsHooks":[]}</script>
 ]
 
 .right-column[
@@ -374,35 +283,11 @@ class:middle
 ]
 ---
 class:middle
-## Business reporting in &lt;svg style="height:0.8em;top:.04em;position:relative;" viewBox="0 0 581 512"&gt;&lt;path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/&gt;&lt;/svg&gt; for the &lt;svg style="height:0.8em;top:.04em;position:relative;" viewBox="0 0 448 512"&gt;&lt;path d="M325.4 289.2L224 390.6 122.6 289.2C54 295.3 0 352.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-70.2-54-127.1-122.6-133.2zM32 192c27.3 0 51.8-11.5 69.2-29.7 15.1 53.9 64 93.7 122.8 93.7 70.7 0 128-57.3 128-128S294.7 0 224 0c-50.4 0-93.6 29.4-114.5 71.8C92.1 47.8 64 32 32 32c0 33.4 17.1 62.8 43.1 80-26 17.2-43.1 46.6-43.1 80zm144-96h96c17.7 0 32 14.3 32 32H144c0-17.7 14.3-32 32-32z"/&gt;&lt;/svg&gt; user
-.pull-left[
-
-###&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/rmarkdown.png" width="10%" style="float:left"/&gt;&amp;nbsp; R Markdown can be used to create: 
-
-- Reports (HTML, PDF, Word)
-- Slide Decks (HTML, PowerPoint)
-- Web Apps
-- Web Pages
-- Books
-- It is part of the `tidyverse` package
-
-![](https://d33wubrfki0l68.cloudfront.net/61d189fd9cdf955058415d3e1b28dd60e1bd7c9b/9791d/images/rmarkdownflow.png)
-]
-.pull-right[ 
-### Your turn
-- Go to server, login in and create new session
-- Create a `RMarkdown` file by *File &gt; New File &gt; R Markdown*
-
-&lt;img src="img/qms_rstudio_rmarkdown.png" alt="rmarkdown",height="100"/&gt;
-]
-
----
-class:middle
 ### R Python Interface &lt;img src="img/reticulated_python.png" width="10%" style="float:right"/&gt;the `reticulate` package
 
 - In your `Rmd` file, insert a `R code chunk` by clicking Insert and selecting R 
-- &lt;svg style="height:0.8em;top:.04em;position:relative;" viewBox="0 0 448 512"&gt;&lt;path d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8v177.9zm0-380.6v180.1H448V32L203.8 65.7z"/&gt;&lt;/svg&gt; **Ctrl+Shift+i**
-- &lt;svg style="height:0.8em;top:.04em;position:relative;" viewBox="0 0 384 512"&gt;&lt;path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/&gt;&lt;/svg&gt; **Cmd+Shift+i**
+- <svg aria-hidden="true" role="img" viewBox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8v177.9zm0-380.6v180.1H448V32L203.8 65.7z"/></svg> **Ctrl+Shift+i**
+- <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg> **Cmd+Shift+i**
 
 
 ```r
@@ -473,7 +358,7 @@ average_py(n)
 ```
 
 ```
-## 0.499717070059419
+## 0.5005078474214767
 ```
 
 ```python
@@ -482,7 +367,7 @@ print("Elapsed time in seconds:",t_end-t_start)
 ```
 
 ```
-## Elapsed time in seconds: 0.24026845299999877
+## Elapsed time in seconds: 0.059023999999999965
 ```
 
 ]
@@ -518,7 +403,7 @@ average_np(n)
 ```
 
 ```
-## 0.4999261655160858
+## 0.49987160011411447
 ```
 
 ```python
@@ -527,7 +412,7 @@ print("Elapsed time in seconds:",t_end-t_start)
 ```
 
 ```
-## Elapsed time in seconds: 0.040460533000000964
+## Elapsed time in seconds: 0.013974000000000153
 ```
 
 ]
@@ -596,11 +481,8 @@ print("Elapsed time in seconds:",t_end-t_start)
 ```
 
 ```
-## Elapsed time in seconds: 0.2828835279999993
+## Elapsed time in seconds: 0.0546009999999999
 ```
-
-
-
 
 ]
 .panel[.panel-name[Plot 1000 Price Paths in R]
@@ -658,7 +540,7 @@ print("Elapsed time in seconds:",t_end-t_start)
 ```
 
 ```
-## Elapsed time in seconds: 0.47104323300000317
+## Elapsed time in seconds: 0.0822989999999999
 ```
 
 - In this instance this is not faster than the base Python code.
@@ -690,7 +572,7 @@ print("Elapsed time in seconds:",t_end-t_start)
 ```
 
 ```
-## Elapsed time in seconds: 1.0274055879999935
+## Elapsed time in seconds: 0.5631619999999997
 ```
 ]
 .panel[.panel-name[second run]
@@ -706,7 +588,7 @@ print("Elapsed time in seconds:",t_end-t_start)
 ```
 
 ```
-## Elapsed time in seconds: 0.03679421800001137
+## Elapsed time in seconds: 0.005236000000000018
 ```
 
 - After compilation `Numba` is much faster than `Numpy`
@@ -731,7 +613,7 @@ class: middle
 
 ```python
 import multiprocessing as mp
-pool = mp.Pool(processes=8)
+pool = mp.Pool(processes=4)
 p=10
 ```
 
@@ -745,186 +627,9 @@ t_end=process_time()
 print("Elapsed time in seconds:",t_end-t_start)
 ```
 
-```
-## Elapsed time in seconds: 0.04978146999999922
-```
-
 - .heatinline[In this instance there is no more speed-up to be observed.]
 ]
 ]
-
----
-class:middle 
-## The economics of AI tools in Business
-
-- Much like the semiconductor reduced the cost of arithmetic , recent advances in AI make the task of prediction abundant and inexpensive.  
-- Advancements have been built around the rubric of machine learning where recent developments in algorithms, computational speed, data storage, and data retrieval have combined to reduce the cost of machine learning predictions.
-- The successful deployment of AI tools requires an insight into how best to insert AI into the workflow of a company.  
-
----
-class:inverse
-## Consulting example
-.pull-left[
-- Recently, myself and Dr Byron Graham we recently involved in an consultation exercise on price intelligence for a global price comparison company
-- .heatinline[Pricing intelligence involves monitoring competitor prices and updating prices accordingly 
-- We we tasked with outlining how to using Machine Learning techniques to improve and scale their current legacy software.
-- Opposite is the workflow of the legacy system.
-]
-]
-.pull-right[
-![](img/workflow_pricecompare.png)
-]
----
-class:middle
-## Consulting example
-.pull-left[
-![](img/workflow_pricecompare.png)
-]
-.pull-right[
-- Firstly, the workflow should be broken down into "jobs" or "tasks".  
-- Each of these tasks usually has a human decision or action attached, which has the potential to be automated via an AI tool.  
-- For instance, in figure 1 the company's workflow has two critical decisions:
-  1. Given a URL, where on the web page is the product price located?
-  2. How can the price be efficiently and dynamically retrieved?
-]
-
----
-class:inverse
-## Economics of AI: Corporate strategy
-
-.heatinline[
--  A successful corporate AI strategy requires clear and meaningful decomposition of the workflow.
-- Each task in the workflow needs to be decomposed in order to see where AI prediction can be inserted.  
-- This, in turn, allows estimation of the benefit of enhanced prediction and the cost of generating that prediction.  
-- Once reasonable estimates have been made, the potential AI projects can be rank-ordered from highest to lowest return on investment(ROI).  
-- Management can then start at the top and implement AI tools as long as the expected ROI makes sense.
-]
-
----
-class:middle
-## Economic of AI: Decomposing business decisions
-.pull-left[
-![](img/anatomy_of_a_task.png)
-]
-.pull-right[
-- Figure 2 illustrates the *anatomy of a task*, a diagram used by [Creative Destruction Labs](https://www.creativedestructionlab.com/ ) a world-leading incubator for successful AI start-ups
-
-- When someone makes a decision, they take input data from the world that enables a prediction. 
-- The prediction is made possible as training has occurred about relationships between different types of data and which data is most closely associated with a situation. 
-- A decision-maker would then combine the prediction with judgement (based on intuition and experience) on what matters to choose appropriate action.  
-- The action leads to an outcome which has an associated payoff or reward. 
-]
-
----
-class:middle
-## Economic of AI: Decomposing business decisions
-.pull-left[
-![](img/anatomy_of_a_task.png)
-]
-.pull-right[
-- The outcome is the consequence of the decision. 
-- It is needed to provide a complete picture. 
-- The outcome may also provide feedback to help improve the next prediction.  
-- And thus, the cycle of the task repeats.  
-]
-
----
-class:middle
-## Economic of AI: Decomposing business decisions
-.pull-left[
-![](img/anatomy_of_a_task.png)
-
-]
-
-.pull-right[
-- Reframing decisions in this way places prediction at the centre of the task. 
-- The process has three different types of data, input, training and feedback. 
-- As there is uncertainty around all prediction, you need judgement when prediction turns out to be wrong.  
-- Judgement involves determining the relative payoff associated with each possible outcome, including those with **correct** decisions as well as those associated with mistakes.  
-
-- Uncertainty increases the cost of judging the payoffs for a given decision. 
-- Observed outcomes can be used as feedback to inform the next prediction.  
-]
----
-class:middle
-## Economic of AI: Decomposing business decisions
-.pull-left[
-
-![](img/anatomy_of_a_task.png)
-
-]
-
-.pull-right[
-
-- By breaking up a decision into elements, we can think about which parts of the human activities will diminish in value and which will increase as a result of enhanced machine prediction.  
-
---
-
-- As machines substitute for humans in prediction, the value of human prediction will decline. 
-
---
-
-- Importantly, the other elements of a decision – judgement, data, action – remain, firmly placed in the human domain. 
-
---
-
-- These are complements to prediction, which means that their value will increase as prediction becomes cheaper. 
-
---
-
--In this way, AI tools can create opportunities to exploit expertise in judgement where previously human predictions were so poor as to avoid any decision making (for example, where the default option is always accepted).  
-
---
-
-- In this case, the demand for human judgement will increase.
-
-]
----
-class:middle
-# Terminology   
-&lt;div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:400px; overflow-x: scroll; width:100%; "&gt;&lt;table class=" lightable-paper" style='font-family: "Arial Narrow", arial, helvetica, sans-serif; margin-left: auto; margin-right: auto;'&gt;
- &lt;thead&gt;
-  &lt;tr&gt;
-   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; Term &lt;/th&gt;
-   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; Explanation &lt;/th&gt;
-  &lt;/tr&gt;
- &lt;/thead&gt;
-&lt;tbody&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Computing instances &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Refers to a (virtual) server instance that is linked to a computing network to provide computing resource. To offer flexibility to their customers, cloud vendors offer different types of nodes that comprise various combinations of CPU (central processing unit), memory, storage, and networking capacity &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Data center &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; A data center comprises a large number of computing nodes and necessary facilities to house the computer system &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Middelware &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; is the computer software that *glues* software applications with computing hardware. In cloud computing, middleware is used to enable communication and management data &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Virtualisation &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Using computer resources to imitate other computer resources. By virtualisation, users are not locked with specific operating systems, CPU architecture, etc. Middleware and virtualisation are particularly important to ensure on-demand self-service of cloud computing &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Cloud bursting &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Cloud computing offers on-demand service. Cloud bursting refers to the process of dynamic deployment of software applications &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Elastic computing &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; is a computing service which has the ability to scale resources to meet requirements, e.g. Amazon's EC2 instances &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Wall clock time(WCT) &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; is the human perception of the passage of time from the start to the completion of a task &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; CPU time &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; The amount of time for which a CPU was used for processing instructions of a computer program or operating system, as opposed to, for example, waiting for input/output(I/O) operations or entering low-power (idle) mode. &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;&lt;/div&gt;
-
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
@@ -974,6 +679,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable
