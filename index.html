@@ -59,7 +59,6 @@ class: center, middle, inverse, title-slide
 
 layout: true
 
-
 ---
 class:inverse
 # Outline 
@@ -188,15 +187,15 @@ class:middle
 .pull-right[
 
 &lt;div class="figure"&gt;
-<div id="htmlwidget-29de2b250ab122666910" style="width:504px;height:200px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-29de2b250ab122666910">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-de40480be47214a0eb1d" style="width:504px;height:200px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-de40480be47214a0eb1d">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 &lt;p class="caption"&gt;**embarrassingly parallel computing**&lt;/p&gt;
 &lt;/div&gt;
 
 
 &lt;div class="figure"&gt;
-<div id="htmlwidget-3ea1707a183454c17c89" style="width:504px;height:200px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-3ea1707a183454c17c89">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\nJob1->Job2[dir=\"both\",label=\"Information\",style=\"dashed\"]\nJob2->Job3[dir=\"both\",label=\"Information\",style=\"dashed\"]\n{rank=same; Job1;Job2;Job3}\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-80dce02cf0bbddcf3a51" style="width:504px;height:200px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-80dce02cf0bbddcf3a51">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\nJob1->Job2[dir=\"both\",label=\"Information\",style=\"dashed\"]\nJob2->Job3[dir=\"both\",label=\"Information\",style=\"dashed\"]\n{rank=same; Job1;Job2;Job3}\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 &lt;p class="caption"&gt;**nonembarrassingly parallel computing**&lt;/p&gt;
 &lt;/div&gt;
 ]
@@ -208,14 +207,14 @@ class:top
 .pull-left[
 
 &lt;div class="figure"&gt;
-<div id="htmlwidget-dbf5ded653582c06aed3" style="width:504px;height:200px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-dbf5ded653582c06aed3">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-e9c5ad0736c2fdfc6aa9" style="width:504px;height:200px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e9c5ad0736c2fdfc6aa9">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 &lt;p class="caption"&gt;Figure 1: embarrassingly parallel computing&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;div class="figure"&gt;
-<div id="htmlwidget-e759c59b42e3d188747f" style="width:504px;height:200px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e759c59b42e3d188747f">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\nJob1->Job2[dir=\"both\",label=\"Information\",style=\"dashed\"]\nJob2->Job3[dir=\"both\",label=\"Information\",style=\"dashed\"]\n{rank=same; Job1;Job2;Job3}\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-fcc6b2843e8978a21fd0" style="width:504px;height:200px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-fcc6b2843e8978a21fd0">{"x":{"diagram":"\ndigraph rmarkdown {\n\"Input Data\"->{Job1,Job2,Job3}\n{Job1,Job2,Job3}->\"Results\"\nJob1->Job2[dir=\"both\",label=\"Information\",style=\"dashed\"]\nJob2->Job3[dir=\"both\",label=\"Information\",style=\"dashed\"]\n{rank=same; Job1;Job2;Job3}\n} \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 &lt;p class="caption"&gt;Figure 2: nonembarrassingly parallel computing&lt;/p&gt;
 &lt;/div&gt;
 ]
@@ -237,8 +236,8 @@ class:inverse
 class:middle,left
 # The serial-parallel scale
 .left-column[
-<div id="htmlwidget-4cca6a3a6ccf095d692e" style="width:504px;height:400px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-4cca6a3a6ccf095d692e">{"x":{"diagram":"\ndigraph  {\ngraph [label=\"Figure 1: Inherently serial\"]\n\"Input Data\"->Job1->\"Results\"->Job2->\"More Results\"->Job3\n} \n","config":{"engine":"dot","options":"margin: auto !important;"}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-c3150e2699ad9dd6821a" style="width:504px;height:400px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c3150e2699ad9dd6821a">{"x":{"diagram":"\ndigraph  {\ngraph [label=\"Figure 1: Inherently serial\"]\n\"Input Data\"->Job1->\"Results\"->Job2->\"More Results\"->Job3\n} \n","config":{"engine":"dot","options":"margin: auto !important;"}},"evals":[],"jsHooks":[]}</script>
 ]
 
 .right-column[
@@ -290,14 +289,14 @@ class:middle
 - <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg> **Cmd+Shift+i**
 
 
-```r
+``` r
 library(reticulate)
 ```
 - Can you insert a `python` code chunk and tell it to print "Hello World"?
 --
 
 
-```python
+``` python
 print("Hello World")
 ```
 
@@ -338,7 +337,7 @@ class:middle
 .panel[.panel-name[Python Code]
 
 
-```python
+``` python
 import random
 from time import process_time
 def average_py(n):
@@ -351,23 +350,23 @@ def average_py(n):
 
 .panel[.panel-name[Output]
 
-```python
+``` python
 t_start=process_time()
 n=1000000
 average_py(n)
 ```
 
 ```
-## 0.5000555312642821
+## 0.500240803394051
 ```
 
-```python
+``` python
 t_end=process_time()
 print("Elapsed time in seconds:",t_end-t_start)
 ```
 
 ```
-## Elapsed time in seconds: 0.05990899999999999
+## Elapsed time in seconds: 0.06165799999999999
 ```
 
 ]
@@ -386,7 +385,7 @@ class:top
 .panel[.panel-name[Python Code]
 
 
-```python
+``` python
 import numpy as np
 def average_np(n):
   s = np.random.random(n)
@@ -396,23 +395,23 @@ def average_np(n):
 
 .panel[.panel-name[Output]
 
-```python
+``` python
 t_start=process_time()
 n=1000000
 average_np(n)
 ```
 
 ```
-## 0.4999003376831862
+## 0.4997606703265934
 ```
 
-```python
+``` python
 t_end=process_time()
 print("Elapsed time in seconds:",t_end-t_start)
 ```
 
 ```
-## Elapsed time in seconds: 0.014695000000000125
+## Elapsed time in seconds: 0.009068999999999994
 ```
 
 ]
@@ -443,7 +442,7 @@ class:top
 .panel[.panel-name[Python Code for MC simulator]
 
 
-```python
+``` python
 import math
 S0=36.
 T=1.0
@@ -468,7 +467,7 @@ def mcs_simulation_py(p):
 
 
 
-```python
+``` python
 t_start=process_time()
 I=1000
 M=100
@@ -476,12 +475,12 @@ S = mcs_simulation_py((M,I));
 t_end=process_time()
 ```
 
-```python
+``` python
 print("Elapsed time in seconds:",t_end-t_start)
 ```
 
 ```
-## Elapsed time in seconds: 0.05530999999999997
+## Elapsed time in seconds: 0.05650099999999991
 ```
 
 ]
@@ -512,7 +511,7 @@ class:middle
 - The below python code is very similar to the previous except for the highlighted line
 
 
-```python
+``` python
 def mcs_simulation_np(p):
   M,I = p
   dt = T/M
@@ -528,19 +527,19 @@ def mcs_simulation_np(p):
 .panel[.panel-name[Execution time for MC simulator]
 
 
-```python
+``` python
 t_start=process_time()
 S = mcs_simulation_np((M,I))
 t_end=process_time()
 ```
 
 
-```python
+``` python
 print("Elapsed time in seconds:",t_end-t_start)
 ```
 
 ```
-## Elapsed time in seconds: 0.08118000000000025
+## Elapsed time in seconds: 0.08752099999999974
 ```
 
 - In this instance this is not faster than the base Python code.
@@ -555,7 +554,7 @@ class:top
 .panel[.panel-name[numba simulation]
 
 
-```python
+``` python
 import numba
 mcs_simulation_nb=numba.jit(mcs_simulation_np)
 ```
@@ -564,7 +563,7 @@ mcs_simulation_nb=numba.jit(mcs_simulation_np)
 ### This call includes the compile time overhead
 
 
-```python
+``` python
 t_start=process_time()
 S=mcs_simulation_nb((M,I))
 t_end=process_time()
@@ -572,14 +571,14 @@ print("Elapsed time in seconds:",t_end-t_start)
 ```
 
 ```
-## Elapsed time in seconds: 0.5976169999999996
+## Elapsed time in seconds: 0.6683669999999999
 ```
 ]
 .panel[.panel-name[second run]
 ### This call excludes the compile time overhead
 
 
-```python
+``` python
 from time import process_time
 t_start=process_time()
 S=mcs_simulation_nb((M,I))
@@ -588,7 +587,7 @@ print("Elapsed time in seconds:",t_end-t_start)
 ```
 
 ```
-## Elapsed time in seconds: 0.005449999999999733
+## Elapsed time in seconds: 0.0049640000000001905
 ```
 
 - After compilation `Numba` is much faster than `Numpy`
@@ -611,7 +610,7 @@ class: middle
 - .saltinline[The following code makes use of the `multiprocessing` module and divides the total number of paths to be simulated into small chunks of size `\(I/p\)`, where `\(p&gt;0\)`]
 
 
-```python
+``` python
 import multiprocessing as mp
 pool = mp.Pool(processes=4)
 p=10
@@ -620,7 +619,7 @@ p=10
 - .saltinline[After all the single tasks are finished, the results are put together in a single `ndarray` object using `np.stack`]
 
 
-```python
+``` python
 t_start=process_time()
 S= np.hstack(pool.map(mcs_simulation_np,p*[(M,int(I/p))]))
 t_end=process_time()
@@ -630,6 +629,77 @@ print("Elapsed time in seconds:",t_end-t_start)
 - .heatinline[In this instance there is no more speed-up to be observed.]
 ]
 ]
+
+---
+class: middle
+# Generative AI and High-Performance Computing
+
+- **Generative AI (GenAI)** has become a game-changer in finance, enabling institutions to leverage vast datasets for innovative trading strategies.
+
+- **High Flyer Hedge Fund**
+  - A leading hedge fund from China, renowned for its trailblazing use of AI in trading.
+  - Achieved significant alpha generation using advanced HPC and GenAI for real-time market predictions.
+
+- **DeepSeek Spin-off**
+  - High Flyer's recent venture into specialised GenAI research.
+  - Focused on developing cutting-edge AI models for market simulation, fraud detection, and risk modelling.
+
+---
+class: middle
+# High Flyer Hedge Fund's AI Approach
+
+.pull-left[
+- **Leveraging HPC for:**
+  - Real-time GenAI-based trading signals.
+  - Rapid processing of unstructured data, including news, sentiment, and alternative data.
+
+- **Advanced Architectures:**
+  - Utilised transformer-based models, enabling context-aware decision-making.
+  - Deployed distributed training frameworks to scale massive datasets and reduce latency.
+]
+
+---
+class: middle
+# GenAI Success: Market Impact
+
+-	**Deep Learning and HPC Synergy**
+-	Enabled High Flyer to perform multi-asset optimisation and deploy thousands of trading bots across global markets.
+-	**Quantitative Breakthroughs**
+-	DeepSeek specialises in creating synthetic market scenarios to test strategies under various conditions.
+-	Facilitates stress testing and resilience analysis with unprecedented speed and accuracy.
+-	**Economic Edge**
+-	High Flyer's use of GenAI and HPC has reportedly outperformed competitors in China by 12% annually over the past five years.
+
+---
+class: middle
+# DeepSeek: A Glimpse Into the Future
+
+- Focus on unsupervised learning models for fraud detection.
+- Simulation-first approach to market manipulation detection.
+-	Accelerated optimisation for trading algorithms.
+
+---
+class: middle
+# GenAI Challenges in HPC
+
+-	**Compute Costs**
+  -	Training transformer models for finance requires massive compute resources.
+-	**Regulatory Barriers**
+-	Deployment of opaque models in trading may face compliance challenges.
+-	**Scalability Issues**
+-	GenAI's reliance on data-rich environments can pose challenges for smaller players.
+- **Future Trends**
+-	Increased focus on explainable AI (XAI) in regulatory compliance.
+-	Development of more energy-efficient HPC architectures.
+- Reasoning models at the PhD-level
+---
+class: middle
+# The Future of Finance: HPC + GenAI
+•	High-performance computing and GenAI are reshaping the financial landscape.
+•	Firms like High Flyer Hedge Fund and DeepSeek demonstrate the potential of AI-first approaches in trading and risk management.
+•	Emerging opportunities will focus on integrating ethical AI and scaling efficient HPC systems.
+
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

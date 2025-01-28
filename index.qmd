@@ -2,26 +2,26 @@
 title: "High performance cloud computing in finance"
 subtitle: "AI and Trading (FIN7030)"
 author: "Barry Quinn"
-output:
-  xaringan::moon_reader:
+format: 
+  revealjs:
     logo: img/qbslogo.png
-    css: ["fonts.css","default", "mycssblend.css"]
+    css: ["fonts.css", "default", "mycssblend.css"]
     lib_dir: libs
-    nature:
-      countdown: 120000
-      highlightStyle: github
-      highlightLines: true
-      countIncrementalSlides: true
-      ratio: "16:9"
-      beforeInit: "https://platform.twitter.com/widgets.js"
+    countdown: 120000
+    highlight-style: github
+    highlight-lines: true
+    incremental: true
+    slide-number: true
+    ratio: "16:9"
+    before-init: "https://platform.twitter.com/widgets.js"
     seal: true
-    includes:
-      in_header: "mathjax-equation-numbers.html" 
+    include-in-header: "mathjax-equation-numbers.html"
 ---
 
-```{r setup, include=FALSE}
+```{r}
+#| include: false
 
-Sys.unsetenv("RETICULATE_PYTHON")
+
 reticulate::use_condaenv("base")
 library(htmltools)
 options(htmltools.dir.version = FALSE)
@@ -48,49 +48,31 @@ knitr::knit_hooks$set(time_it = local({
     }
   }
 }))
-xaringanExtra::use_tile_view()
-xaringanExtra::use_webcam()
-xaringanExtra::use_broadcast()
-xaringanExtra::use_panelset()
-xaringanExtra::use_extra_styles(
-  hover_code_line = TRUE,         #<<
-  mute_unhighlighted_code = TRUE  #<<
-)
+
 ```
 
-layout: true
+## Outline
+- [What is cloud computing?]{.salt}
+- [Introduction to the Q-RaP]{.fat}
+- [Taxonomy of parallel computing]{.acid}
+- [Performance computing in Python]{.heat}
 
----
-class:inverse
-# Outline 
-- .salt[What is cloud computing?]
-- .fat[Introduction to the Q-RaP]
-- .acid[Taxonomy of parallel computing]
-- .heat[Performance computing in Python]
----
-
-class:middle
-background-image: url(img/recticulated_python.png)
-background-size: cover
-
-## Introduction
-.pull-left-2[
+## Introduction {.middle}
+::: {.pull-left-2}
 - This course will expose you to the flexibility of cloud computing
 - We will learn how to build agile analytics by combining `r fa(name="r-project")` `r fa(name="plus")` `r fa(name="python")` 
 
 - Financial institutions have a long history of heavily investing in technology for gaining market share and defending their current position
 - The democratisation of computing processing power by cloud providers, has lead to an explosion in financial machine learning applications.
 - Today technology that would have costed millions 20 years ago can be rented for thousand from these cloud providers
-]
+:::
 
-.pull-right-1[
+::: {.pull-right-1}
 >Meriwther spent $20 million on a state-of-the-art computer system and hired a crack team of financial engineers to run the show at LTCM..... 
 `r tufte::quote_footer('Scott Patterson, The Quants, 2010')`
-]
+:::
 
----
-class: middle
-# What is cloud computing ?
+## What is cloud computing ? {.middle}
 
 - .heat[Cloud computing shares many of the similarities of electricity]
 
@@ -102,9 +84,8 @@ class: middle
 --
 
 - .heat[Much like electricity the core concept of cloud computing is resource sharing]
----
-class: top
-# What is cloud computing ?
+
+## What is cloud computing ? {.top}
 
 .fat[definitions:]
 
@@ -118,9 +99,7 @@ class: top
 
 `r tufte::quote_footer("Beginners guide to cloud computing, Microsoft Azure, 2020")`
 
----
-class:top
-## Essential characteristics of cloud computing solutions
+## Essential characteristics of cloud computing solutions {.top}
 
 .heatinline[The follow distinguish cloud computing from other solutions, such as on-site high performance computing servers]
 
@@ -135,24 +114,16 @@ class:top
 - .large.fancy[Measured service]
   - The resource utilisation is automatically controlled and optimised by the cloud systems.  The usage is monitored, measured, and reported
 
----
-class: middle
-
-## Why high performance computing and why now?
-.salt[A key reason is the regulatory response to the flash crash of 2010]
+## Why high performance computing and why now? {.middle}
+[A key reason is the regulatory response to the flash crash of 2010]{.salt}
 > On the 6th May, 2010 at 2.45 p.m.(EST), the US stock market experienced a nearly 10% drop in the Dow Jones Industrial Average, only to recover most of ther loss a few minutes later
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/_ZDEWVJan0s" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
----
-class:inverse
-# Flash crashed explained
+## Flash crashed explained
 <img src="img/nyt_flashcrash.png" height="70%" width="70%" class="center">
 
----
-class: middle
-
-## Why high performance computing and why now?
+## Why high performance computing and why now? {.middle}
 
 .saltinline[It took the regulatory agencies (SEC) five months to come up with an investigation report on the 2010 flash crash]
 
@@ -162,32 +133,21 @@ class: middle
 
 .heatinline[After the congressional hearing Lawrence Berkley National Laboratory (LNBL) established the Computational Intelligence and Forecasting Technologies (CIFT) project to promote HPC tools and techniques for analysing of financial times series data]
 
-
----
-class:middle
-background-image: url(img/t1.png)
-background-size: cover
----
-class:middle
-background-image: url(img/t2.png)
-background-size: cover
-
----
-class:middle
-# Taxonomy of parallel computing
+## Taxonomy of parallel computing {.middle}
 - .large[Computer processors process instructions sequentially.
 - Traditional computing problems are serial by design.
 - The birth of multiprocessors (*multicore processors*) has innovated a new type of computing problem:
 ]
 .acid[how to utilise the parallel structure]
 - .large[Roughly speaking, multicore processors are equivalent to running multiple computers at a time]
----
-class:middle
-# Taxonomy of parallel computing
+
+## Taxonomy of parallel computing {.middle}
 .pull-left.acid[Parallel computing problems in contrast to serial computing problems, refer to the type of problem that can be divided into small Jobs which can be processed simultaneously ]
 .pull-right[
 
-```{r embar_parallel,echo=FALSE,fig.cap="**embarrassingly parallel computing**"}
+```{r}
+#| echo: false
+#| fig-cap: "**embarrassingly parallel computing**"
 DiagrammeR::grViz("
 digraph rmarkdown {
 'Input Data'->{Job1,Job2,Job3}
@@ -199,8 +159,9 @@ digraph rmarkdown {
 
 ```
 
-
-```{r nonembar_parallel,echo=FALSE,fig.cap="**nonembarrassingly parallel computing**"}
+```{r}
+#| echo: false
+#| fig-cap: "**nonembarrassingly parallel computing**"
 DiagrammeR::grViz("
 digraph rmarkdown {
 'Input Data'->{Job1,Job2,Job3}
@@ -214,14 +175,14 @@ Job2->Job3[dir='both',label='Information',style='dashed']
 )
 ```
 ]
----
-class:top
 
-# Taxonomy of parallel computing
+## Taxonomy of parallel computing {.top}
 
 .pull-left[
 
-```{r embar_parallel1,echo=FALSE,fig.cap="Figure 1: embarrassingly parallel computing"}
+```{r}
+#| echo: false
+#| fig-cap: "Figure 1: embarrassingly parallel computing"
 DiagrammeR::grViz("
 digraph rmarkdown {
 'Input Data'->{Job1,Job2,Job3}
@@ -233,7 +194,9 @@ digraph rmarkdown {
 
 ```
 
-```{r nonembar_parallel1,echo=FALSE,fig.cap="Figure 2: nonembarrassingly parallel computing"}
+```{r}
+#| echo: false
+#| fig-cap: "Figure 2: nonembarrassingly parallel computing"
 DiagrammeR::grViz("
 digraph rmarkdown {
 'Input Data'->{Job1,Job2,Job3}
@@ -253,19 +216,17 @@ Job2->Job3[dir='both',label='Information',style='dashed']
 - Otherwise we have a  *non embarrassingly parallel* problem
 - In figure 1 there is no communication between Jobs, while in figure 2 some communication between Jobs is required
 ]
----
-class:inverse
 
-# Taxonomy of parallel computing
-.
+## Taxonomy of parallel computing
+
 - .large[Problems can also be classified by there nature:
 - .heatinline[Data parallelism] focuses on distributing data across different processors
 - .heatinline[Job parallelism] focuses on distributing execution processes (subtasks) to different processors]
----
-class:middle,left
-# The serial-parallel scale
+
+## The serial-parallel scale {.middle,left}
 .left-column[
-```{r, echo=FALSE}
+```{r}
+#| echo: false
 DiagrammeR::grViz("
 digraph  {
 graph [label='Figure 1: Inherently serial']
@@ -288,9 +249,7 @@ graph [label='Figure 1: Inherently serial']
 
 ]
 
----
-class:middle
-# Example from the finance industry
+## Example from the finance industry {.middle}
 ####.heat[Monte Carlo (MC) Options Pricing]
 - Using arbitrage pricing theory, the option price is equal to the expected payoff $V$ discounted by a factor $D$ which can be evaluated via MC method.
 The Monte Carlo estimator of option price is given by
@@ -301,9 +260,7 @@ where N is the number of sample paths (simulations)
 2. It is a task-parallel in the sense that simulations of each path is a small task.  However it is not data-parallel since there is no data set to be distributed to different computing nodes.
 3. The scalable benefit is improved price accuracy as $N$ increases, the error reduction being approximately $1/\sqrt{N}$
 
----
-class:middle
-# Example from the finance industry
+## Example from the finance industry {.middle}
 #####.heat[Backtesting Investment Strategies]
 
 .pull-left[
@@ -318,15 +275,15 @@ class:middle
 - By generating subsamples from test data set(e.g. by bootstrapping), strategy can be processed on different subsamples simultaneously
 - The results on different subsamples is then aggregated to generate the performance and risk report of the strategy
 ]
----
-class:middle
-### R Python Interface <img src="img/reticulated_python.png" width="10%" style="float:right"/>the `reticulate` package
+
+## R Python Interface <img src="img/reticulated_python.png" width="10%" style="float:right"/>the `reticulate` package {.middle}
 
 - In your `Rmd` file, insert a `R code chunk` by clicking Insert and selecting R 
 - `r fa('windows')` **Ctrl+Shift+i**
 - `r fa('apple')` **Cmd+Shift+i**
 
-```{r python+r set-up}
+```{r}
+#| label: python+r set-up
 library(reticulate)
 ```
 - Can you insert a `python` code chunk and tell it to print "Hello World"?
@@ -336,18 +293,15 @@ library(reticulate)
 print("Hello World")
 ```
 
----
-class:middle
-# Improving computational performance
+## Improving computational performance {.middle}
 
 - There is a commonly held misconception that both Python and R are relatively slow programming languages and not appropriate to implement computationally demand tasks in finance.
 - This criticism stems from the fact that most financial algorithms require loops and loops are slow on interpreted languages such as R and Python.
 - Traditionally C or C++, which are compiled programming languages, have been used to speed up loops. 
 
----
-class:middle
-# Performance Python
-```{r xaringan-tachyons, echo=FALSE}
+## Performance Python {.middle}
+```{r}
+#| echo: false
 xaringanExtra::use_tachyons()
 ```
 - We will consider a number of approaches to speed up typical tasks and algorithms often encountered in finance including:
@@ -357,9 +311,8 @@ xaringanExtra::use_tachyons()
 3. **Static Compiling**:<br> `Cython` is not only a Python package but a hybrid language that combines Python and C.
 4. **Multiprocessing**:<br>Finally we can excute the code in parallel using the `multiprocessing`Python package
 ]
----
-class:middle
-# Loops in Python
+
+## Loops in Python {.middle}
 
 .panelset[
 .panel[.panel-name[Explanation]
@@ -392,9 +345,8 @@ print("Elapsed time in seconds:",t_end-t_start)
 
 ]
 ]
----
-class:top
-# Loops using `Numpy`
+
+## Loops using `Numpy` {.top}
 .panelset[
 .panel[.panel-name[Explanation]
 - The strength of `Numpy` lies in its vectorisation capabilities.
@@ -430,16 +382,14 @@ print("Elapsed time in seconds:",t_end-t_start)
 
 ]
 ]
----
-class:top
-# Monte Carlo Simulation in Finance
+
+## Monte Carlo Simulation in Finance {.top}
 - As noted earlier, Monte Carlo simulation is an indepensible numerical tool on quantitative finance.
 - Banks and other financial institutions using it for pricing and risk management purposes. 
 - It is one of the most powerful, flexible, but computationally demanding methods in quantitative finance. 
 - This demand has only increased since Basel III, as banks and financial institutions are required to pricing and hedge counterparty risk of complex derivatives.
----
-class:top
-# Monte Carlo Simulation of Stock Prices
+
+## Monte Carlo Simulation of Stock Prices {.top}
 .panelset[
 .panel[.panel-name[Explanation]
 - In derivative pricing it is standard practice to simulate a set of discrete time series paths for the value of a stock
@@ -470,9 +420,6 @@ def mcs_simulation_py(p):
 
 .panel[.panel-name[Execution for MC simulator]
 
-<!-- reticulate::source_python('mcs_simulation.py') -->
-
-
 ```{python}
 t_start=process_time()
 I=1000
@@ -500,7 +447,10 @@ py$S %>%
 ```
 ]
 .pull-right[
-```{r plot_python_object, echo=FALSE, fig.retina=3,fig.height=6}
+```{r}
+#| echo: false
+#| fig-retina: 3
+#| fig-height: 6
 py$S %>% 
   as_tibble() %>%
   mutate(t=row_number()) %>%
@@ -513,9 +463,8 @@ py$S %>%
 ]
 ]
 ]
----
-class:middle
-# MC simulator using `Numpy`
+
+## MC simulator using `Numpy` {.middle}
 .panelset[
 .panel[.panel-name[`Numpy` Version]
 - The below python code is very similar to the previous except for the highlighted line
@@ -550,9 +499,7 @@ print("Elapsed time in seconds:",t_end-t_start)
 ]
 ]
 
----
-class:top
-# MC simulator using `Numba`
+## MC simulator using `Numba` {.top}
 .panelset[
 .panel[.panel-name[numba simulation]
 
@@ -585,9 +532,8 @@ print("Elapsed time in seconds:",t_end-t_start)
 - After compilation `Numba` is much faster than `Numpy`
 ]
 ]
----
-class: middle
-# Multiprocessing
+
+## Multiprocessing {.middle}
 
 .panelset[
 .panel[.panel-name[Explanation]
@@ -601,8 +547,8 @@ class: middle
 
 - .saltinline[The following code makes use of the `multiprocessing` module and divides the total number of paths to be simulated into small chunks of size $I/p$, where $p>0$]
 
-```{python, eval=FALSE}
-
+```{python}
+#| eval: false
 import multiprocessing as mp
 pool = mp.Pool(processes=4)
 p=10
@@ -610,8 +556,8 @@ p=10
 
 - .saltinline[After all the single tasks are finished, the results are put together in a single `ndarray` object using `np.stack`]
 
-```{python, eval=FALSE}
-
+```{python}
+#| eval: false
 t_start=process_time()
 S= np.hstack(pool.map(mcs_simulation_np,p*[(M,int(I/p))]))
 t_end=process_time()
@@ -620,75 +566,4 @@ print("Elapsed time in seconds:",t_end-t_start)
 
 - .heatinline[In this instance there is no more speed-up to be observed.]
 ]
-]
-
----
-class: middle
-# Generative AI and High-Performance Computing
-
-- **Generative AI (GenAI)** has become a game-changer in finance, enabling institutions to leverage vast datasets for innovative trading strategies.
-
-- **High Flyer Hedge Fund**
-  - A leading hedge fund from China, renowned for its trailblazing use of AI in trading.
-  - Achieved significant alpha generation using advanced HPC and GenAI for real-time market predictions.
-
-- **DeepSeek Spin-off**
-  - High Flyer's recent venture into specialised GenAI research.
-  - Focused on developing cutting-edge AI models for market simulation, fraud detection, and risk modelling.
-
----
-class: middle
-# High Flyer Hedge Fund's AI Approach
-
-.pull-left[
-- **Leveraging HPC for:**
-  - Real-time GenAI-based trading signals.
-  - Rapid processing of unstructured data, including news, sentiment, and alternative data.
-
-- **Advanced Architectures:**
-  - Utilised transformer-based models, enabling context-aware decision-making.
-  - Deployed distributed training frameworks to scale massive datasets and reduce latency.
-]
-
----
-class: middle
-# GenAI Success: Market Impact
-
--	**Deep Learning and HPC Synergy**
--	Enabled High Flyer to perform multi-asset optimisation and deploy thousands of trading bots across global markets.
--	**Quantitative Breakthroughs**
--	DeepSeek specialises in creating synthetic market scenarios to test strategies under various conditions.
--	Facilitates stress testing and resilience analysis with unprecedented speed and accuracy.
--	**Economic Edge**
--	High Flyer's use of GenAI and HPC has reportedly outperformed competitors in China by 12% annually over the past five years.
-
----
-class: middle
-# DeepSeek: A Glimpse Into the Future
-
-- Focus on unsupervised learning models for fraud detection.
-- Simulation-first approach to market manipulation detection.
--	Accelerated optimisation for trading algorithms.
-
----
-class: middle
-# GenAI Challenges in HPC
-
--	**Compute Costs**
-  -	Training transformer models for finance requires massive compute resources.
--	**Regulatory Barriers**
--	Deployment of opaque models in trading may face compliance challenges.
--	**Scalability Issues**
--	GenAI's reliance on data-rich environments can pose challenges for smaller players.
-- **Future Trends**
--	Increased focus on explainable AI (XAI) in regulatory compliance.
--	Development of more energy-efficient HPC architectures.
-- Reasoning models at the PhD-level
----
-class: middle
-# The Future of Finance: HPC + GenAI
-•	High-performance computing and GenAI are reshaping the financial landscape.
-•	Firms like High Flyer Hedge Fund and DeepSeek demonstrate the potential of AI-first approaches in trading and risk management.
-•	Emerging opportunities will focus on integrating ethical AI and scaling efficient HPC systems.
-
-
+] 
